@@ -38,20 +38,18 @@ Transit tools
 * Context API – state management across the app
 * React Query – efficient API calls with caching via reusable custom hooks
 * react-hook-form – smooth, performant form handling and validation
-* @astrodraw/astrochart – astrology chart renderer
-* js\_astro – astrology algorithms library used for retrograde, cusps, and planetary positions (excluding Chiron)
-* moment + moment-timezone – date and time handling
+* @astrodraw/astrochart – astrology chart renderer available at astrodraw.github.io - License: MIT License
+* js\_astro – astrology algorithms library used for retrograde, cusps, and planetary positions (excluding Chiron) available on GitHub at astsakai/js_astro - License: MIT License
+* moment + moment-timezone – date and time handling via timezonedb.com - License: TimeZoneDB Terms of Service
 * lodash – helpful utility functions
 * framer-motion – UI animations and transitions
-* timezone‑api & nominatim – location/timezone lookup
+* nominatim – location/timezone lookup (Nominatim, OpenStreetMap) via nominatim.openstreetmap.org - License: Data Policy
 * cookies‑next – cookie management
 * Tailwind CSS + PostCSS + Autoprefixer – utility-first styling setup
 * ESLint + Prettier – code quality and formatting
 * React Query Devtools– query debugging in development
 
----
-
-## 🧠 What I’ve Learned & Demonstrated
+ 🧠 What I’ve Learned & Demonstrated
 
 * Cleanly refactored from vanilla‑JS MVC to a robust React/Next.js architecture
 * Implemented global state via Context alongside **local caching**
@@ -61,7 +59,7 @@ Transit tools
 * Integrated complex third-party APIs (timezone, nominatim)
 * Rendered astrology charts with precise planetary and cusp calculations
 * Styled a responsive, filterable UI with Tailwind CSS
-
+APIs and third-party libraries
 
 🔧 Running the Project
 
