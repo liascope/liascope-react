@@ -1,0 +1,106 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+html,
+body {
+  @apply w-full font-sans m-0 min-h-screen text-gray-700 ;
+  background: radial-gradient(
+    circle,
+    rgba(237, 214, 145, 0.7) 21%,
+    rgba(253, 252, 248, 0.6) 33%,
+    rgba(247, 241, 224, 1) 100%
+  );  
+  height: auto;
+  max-height: fit-content;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+body {
+@apply relative
+}
+
+legend {
+  font-weight:bold; letter-spacing: 1px; color:#4fa091
+
+}
+button {
+  @apply cursor-pointer
+}
+.chartHeader {
+  @apply text-5xl tracking-widest font-bold text-[#e89b53] font-[Dancing_Script] text-start ml-[4rem]
+}
+
+
+h3 {
+  @apply  tracking-widest font-semibold
+}
+/* text-[#ba7e47] */
+/* Input Felder */
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  @apply w-full px-2 py-1 text-base mb-1 border border-[#e6c155] bg-white/80 rounded-2xl text-[darkGrey] flex items-center justify-center;
+}
+
+input:hover {
+  border-color: #e89b53;
+}
+ fieldset {
+  @apply flex flex-col justify-center h-fit gap-1 p-2 text-gray-500}
+
+form {
+  @apply flex w-fit h-auto relative py-9 flex-row gap-10 items-center justify-center bg-white/30 backdrop-blur-md p-6 rounded-xl shadow-lg}
+
+
+.btnEffect {
+   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-2xl cursor-pointer transition-colors duration-300 hover:bg-[#e89b53] w-fit px-5 py-2
+}
+
+/* SVG Data Attributes */
+[data-name="square"],
+[data-name="opposition"] {
+  stroke: #ce8063;
+  stroke-width: 2px;
+}
+
+[data-name="trine"] {
+  stroke: #4fa091;
+  stroke-width: 2px;
+}
+
+[data-name="sextile"] {
+  stroke: #afc8e7;
+  stroke-width: 2px;
+}
+[data-name="quincunx"] {
+  stroke: #c4a484;
+  stroke-width: 1px;
+  stroke-dasharray: 5 3;
+}
+
+[data-name="semiSextile"] {
+  stroke: #c4a484;
+  stroke-width: 2px;
+  /* stroke-dasharray: 5 2; */
+}
+
+legend {
+  @apply font-semibold
+}
+th, td {
+  @apply border border-black p-2 text-center w-4 h-4 box-border;
+}
+.btnGreen {
+  @apply  border-none rounded-2xl cursor-pointer
+          transition-all duration-300 mb-1 tracking-widest hover:bg-[#607f6a] hover:text-white 
+}
+td.empty {
+  border: none;
+}
+
+.no-border-table td,
+.no-border-table th {
+  @apply border-0 p-2 text-center w-4 h-4 box-border;
+}

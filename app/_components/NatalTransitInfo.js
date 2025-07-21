@@ -1,0 +1,68 @@
+'use client'
+import SaveProfileButton from "./SaveProfileButton"
+import { useAstroForm } from "./context/AstroContext"
+import { formatDate } from "@/app/_lib/helper"
+import { useMemo } from "react";
+import Button from "./Button"
+
+export default function NatalTransitInfo() {
+ const {formState, chartData} = useAstroForm()
+
+  const birthDate = useMemo(() => {
+  return formatDate(formState?.birthDate);
+}, [formState?.birthDate]);
+
+const transitDate = useMemo(()=>{return formatDate(formState?.transitDate)}, [formState?.transitDate])
+
+    return<div className=" bg-white/30 backdrop-blur-md p-4 rounded-xl h-fit w-full flex flex-col gap-2">
+      <div className="flex flex-row w-full justify-between">
+      <Button type='savedCharts'></Button> <Button type='openForm' btnSize="text-lb">Edit ✎</Button>
+      </div>
+     <div className="h-fit p-4 border-gray-300 border-b ">
+<div className="w-full h-fit  flex flex-row justify-between">
+  <h2 className=" font-bold mb-2 text-[#e89b53] font-[Dancing_Script] text-3xl">Natal Dates for {formState?.user}</h2>
+  <SaveProfileButton></SaveProfileButton></div>
+  <div className="space-y-2">
+    <div className="flex justify-between">
+      <span className="font-medium ">Birth Date</span>
+      <span>{birthDate}</span>
+    </div>
+    <div className="flex justify-between ">
+      <span className="font-medium ">Birth Time</span>
+      <div className="flex flex-col">
+      <span className="text-end">{formState?.birthTimeUnknown ? '-- : --' : `${formState?.birthTime} ${chartData?.natalData?.localTime || ''}` }</span>
+       <p className="scale-[80%] text-end"> {formState?.birthTimeUnknown ? "" : chartData?.natalData?.utcTime || ''}</p> 
+       </div>
+    </div>
+    <div className="flex justify-between">
+      <span className="font-medium ">Birth Place</span>
+  <span>
+  {formState?.birthPlaceData?.city}, {formState?.birthPlaceData?.country}
+</span>
+
+    </div>
+  </div>
+</div>
+ <div className=" h-fit p-4">
+  <h2 className="text-3xl font-bold mb-2 text-[#e89b53] font-[Dancing_Script]">Transit Dates for {formState?.moment}</h2>
+  <div className="space-y-2">
+    <div className="flex justify-between  ">
+      <span className="font-medium ">Transit Date</span>
+      <span>{transitDate}</span>
+    </div>
+    <div className="flex justify-between  ">
+      <span className="font-medium ">Transit Time</span><div className="flex flex-col">
+      <span className=" text-end">{formState?.transitTimeUnknown ? '-- : --' : `${formState?.transitTime} ${chartData?.transitData?.localTime || '' }` }</span>
+      <p className=" scale-[80%] text-end"> {formState?.transitTimeUnknown ? "" : chartData?.transitData?.utcTime || ''}</p> 
+       </div>
+    </div>
+    <div className="flex justify-between">
+      <span className="font-medium">Transit Place</span>
+      <span>
+  {formState?.transitPlaceData?.city}, {formState?.transitPlaceData?.country}
+</span>
+    </div>
+  </div>
+</div>
+ </div>
+}
