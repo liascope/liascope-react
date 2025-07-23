@@ -25,7 +25,7 @@ const {unknownTime}=useAstroForm()
           <li key={href} className="list-none ml-[4rem] mb-1">
         <Link
           href={href}
-          aria-current={isActive ? "page" : undefined}
+          aria-current={isActive ? "page" : undefined} scroll={false}
           className={`block text-white/80 text-2xl px-10 py-4 w-full rounded-lg cursor-pointer
             transition-all duration-300 tracking-widest
             hover:-translate-x-14 hover:bg-[#607f6a]
