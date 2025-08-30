@@ -22,28 +22,27 @@ export default function Charts({ chartID }) {
 
   return (
     <motion.div
-      className="flex flex-row w-full justify-between"
+      className="flex sm:flex-row flex-col-reverse w-screen sm:w-full justify-between"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="w-[35%] h-fit flex flex-col">
+      <div className="sm:w-[35%] w-fit h-fit flex flex-col">
         <HouseSignList data={{ planetList, cuspList }} />
         <AspectTable aspect={aspect} />
 
         <ToggleAspectListBtn
           buttonLabel="Aspect List"
-          className="relative z-1 -mt-25 ml-12 right-2"
+          className="relative z-1 -mt-25 sm:ml-12 ml-6 right-2"
           position="bottom-1"
           dropdownClassName="absolute w-fit left-0 p-2 h-[15rem] text-center overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
         >
           <AspectList data={{ aspectList }} />
         </ToggleAspectListBtn>
       </div>
-    <div className='relative'><div className='absolute top-0 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-      <div id={chartID}/> </div>
+    <div className='relative'><div className='absolute sm:top-0 top-6 sm:left-2 left-0 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
+      <div className='sm:block flex items-center justify-center h-svw p-3 sm:p-0 -ml-8 sm:ml-0'  id={chartID}/> </div>
     </motion.div>
   );
 }
- 

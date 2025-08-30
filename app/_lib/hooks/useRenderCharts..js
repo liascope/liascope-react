@@ -1,4 +1,4 @@
-import { useMemo, useEffect, } from "react";
+import { useMemo, useEffect,useState } from "react";
 import { calculateAspects, generateTableAspects, generateAllListData, } from "../data-service";
 import { aspectToSymbol } from "../helper";
 // import * as astrochart from "@astrodraw/astrochart";
@@ -8,6 +8,17 @@ import { useAstroForm } from "@/app/_components/context/AstroContext";
 // Custom Hook for SVG Chart & Aspect Table
 export function useRenderCharts(chartID) {
   const context = useAstroForm();
+//    const [size, setSize] = useState(900);
+// 
+//   useEffect(() => {
+//     const mq = window.matchMedia("(min-width: 640px)"); // sm breakpoint = 640px
+//     const updateSize = () => setSize(mq.matches ? 900 : 600);
+// 
+//     updateSize(); // Initial
+//     mq.addEventListener("change", updateSize);
+// 
+//     return () => mq.removeEventListener("change", updateSize);
+//   }, []);
   const data = useMemo(() => context[`${chartID}Data`] ?? null, [chartID, context]);
 
   // Chart Rendering
@@ -16,7 +27,8 @@ export function useRenderCharts(chartID) {
 
   let chartInstance;
 //dynamic import:
-  import('@astrodraw/astrochart').then((astrochart) => {
+  import('@astrodraw/astrochart').then((astrochart) => {const el = document.getElementById(chartID);
+  if (el) el.innerHTML = "";
     const chart = new astrochart.Chart(chartID, 900, 900, settings);zodiac
     chartID === "perfection"
       ? chart.radix(data)

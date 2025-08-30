@@ -26,7 +26,7 @@ const {unknownTime}=useAstroForm()
         <Link
           href={href}
           aria-current={isActive ? "page" : undefined} scroll={false}
-          className={`block text-white/80 text-2xl px-10 py-4 w-full rounded-lg cursor-pointer
+          className={`block text-white/80 text-sm sm:text-2xl px-5 sm:px-10 py-1 sm:py-4 w-full rounded-sm sm:rounded-lg cursor-pointer
             transition-all duration-300 tracking-widest
             hover:-translate-x-14 hover:bg-[#607f6a]
             ${isActive ? '-translate-x-14 !bg-[#e89b53]' : 'bg-[#e6c155cc]'}`}

@@ -22,8 +22,8 @@ export default function AspectFilter({chartID}) {
   }, [selectedAspect, chartID]);
 
   return (
-    <div className="text-xs text-center">
-      <p className="mb-1">Filter Aspects:</p>
+    <div className="text-xs text-left">
+      <p className="sm:mb-1">Filter Aspects:</p>
       <select
         value={selectedAspect}
         onChange={(e) => setSelectedAspect(e.target.value)}

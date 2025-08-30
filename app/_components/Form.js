@@ -84,8 +84,9 @@ useEffect(() => {
   };
 
   return (<div className="w-full h-full flex item-center justify-center">
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-6">
       <fieldset>
+        <div>
         <legend>Birth Information</legend>
 
         <label htmlFor="user">Username:</label>
@@ -110,7 +111,7 @@ useEffect(() => {
 
         />
         <label htmlFor="natalHs">House System:</label>
-        <select {...register("natalHouseSystem")} id="natalHs">
+        <select {...register("natalHouseSystem")} id="natalHs" >
           <option value="1">Placidus</option>
           <option value="2">Campanus</option>
           <option value="3">Regiomontanus</option>
@@ -119,9 +120,8 @@ useEffect(() => {
           <option value="6">Axial Rotation</option>
           <option value="7">Morinus</option>
         </select>
-      </fieldset>
-
-      <fieldset>
+     </div>
+     <div>
         <legend>Transit Information</legend>
 
         <label htmlFor="moment">Transit Moment:</label>
@@ -154,16 +154,16 @@ useEffect(() => {
           <option value="5">Topocentric</option>
           <option value="6">Axial Rotation</option>
           <option value="7">Morinus</option>
-        </select>
+        </select></div>
       </fieldset>
-      <div className="flex flex-col h-full w-fit justify-between">
+      <div className="flex flex-col py-10 sm:py-0 h-full w-fit justify-between">
         <div className="w-fit flex-col flex justify-between h-fit gap-3">
         <Button type='savedCharts'></Button>
           <div className="btnEffect" onClick={() => setTodaysTransit(!todaysTransit)}>
             Todays Transits
           </div>
         </div>
-        <button type="submit" className="text-2xl btnEffect">
+        <button type="submit" className="text-md sm:text-2xl btnEffect">
           Show Charts
         </button>
       </div>

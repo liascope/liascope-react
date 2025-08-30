@@ -3,22 +3,20 @@
 
 html,
 body {
-  @apply w-full font-sans m-0 min-h-screen text-gray-700 ;
+  @apply min-w-screen font-sans m-0 min-h-screen text-gray-700 ;
   background: radial-gradient(
     circle,
     rgba(237, 214, 145, 0.7) 21%,
     rgba(253, 252, 248, 0.6) 33%,
     rgba(247, 241, 224, 1) 100%
   );  
-  height: auto;
-  max-height: fit-content;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 body {
-@apply relative
+@apply relative 
 }
 
 legend {
@@ -29,35 +27,37 @@ button {
   @apply cursor-pointer
 }
 .chartHeader {
-  @apply text-5xl tracking-widest font-bold text-[#e89b53] font-[Dancing_Script] text-start ml-[4rem]
+  @apply sm:text-5xl text-3xl tracking-widest font-bold text-[#e89b53] font-[Dancing_Script] text-start ml-[4rem] sm:mt-0 mt-10
 }
 
 
 h3 {
-  @apply  tracking-widest font-semibold
+  @apply tracking-widest font-semibold
 }
 /* text-[#ba7e47] */
 /* Input Felder */
 input[type="text"],
 input[type="date"],
 input[type="time"] {
-  @apply w-full px-2 py-1 text-base mb-1 border border-[#e6c155] bg-white/80 rounded-2xl text-[darkGrey] flex items-center justify-center;
+  @apply w-full px-2 py-1 text-xs sm:text-base mb-1 border border-[#e6c155] bg-white/80 rounded-md sm:rounded-2xl text-[darkGrey] flex items-center justify-center;
 }
 
 input:hover {
   border-color: #e89b53;
 }
  fieldset {
-  @apply flex flex-col justify-center h-fit gap-1 p-2 text-gray-500}
+  @apply flex flex-col sm:py-9 sm:flex-row justify-center h-fit gap-10 p-3 sm:p-6 text-gray-500}
 
 form {
-  @apply flex w-fit h-auto relative py-9 flex-row gap-10 items-center justify-center bg-white/30 backdrop-blur-md p-6 rounded-xl shadow-lg}
+  @apply flex w-fit h-auto relative sm:flex-row sm:gap-10 gap-3 items-center justify-center sm:bg-white/30 backdrop-blur-md p-3 sm:p-6 rounded-xl shadow-lg}
 
 
 .btnEffect {
-   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-2xl cursor-pointer transition-colors duration-300 hover:bg-[#e89b53] w-fit px-5 py-2
+   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors duration-300 hover:bg-[#e89b53] w-fit sm:px-5 py-2 px-2
 }
-
+label {
+  @apply sm:text-base text-sm
+}
 /* SVG Data Attributes */
 [data-name="square"],
 [data-name="opposition"] {
@@ -87,13 +87,13 @@ form {
 }
 
 legend {
-  @apply font-semibold
+  @apply font-semibold sm:text-base text-sm
 }
 th, td {
   @apply border border-black p-2 text-center w-4 h-4 box-border;
 }
 .btnGreen {
-  @apply  border-none rounded-2xl cursor-pointer
+  @apply  border-none rounded-sm sm:rounded-md cursor-pointer
           transition-all duration-300 mb-1 tracking-widest hover:bg-[#607f6a] hover:text-white 
 }
 td.empty {

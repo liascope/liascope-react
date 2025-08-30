@@ -21,9 +21,9 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
   });
 
   return (
-    <div className="flex flex-row w-fit relative">
-      <div className="overflow-hidden border rounded-md w-[40rem] scale-[88%] -mt-3 -ml-7">
-        <table className="w-full h-full table-fixed border-collapse">
+    <div className="flex sm:flex-row flex-col sm:w-fit w-full relative">
+      <div className="overflow-hidden border rounded-md sm:w-[40rem] w-screen scale-[88%] sm:-mt-3 -mt-6 -ml-7">
+        <table className="w-full h-full table-fixed border-collapse text-xs sm:text-md">
           <thead>
             <tr>
               <th></th>
@@ -35,7 +35,7 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
           <tbody>
             {aspectMatrix.map((row) => (
               <tr key={row.planet}>
-                <th className="text-[#4fa091] font-bold">{symbols.find((s) => s[1] === row.planet)?.[0]}</th>
+                <th className="text-[#4fa091] sm:font-bold">{symbols.find((s) => s[1] === row.planet)?.[0]}</th>
                 {row.aspects.map((symbol, idx) => (
                   <td className="font-bold" key={idx}>{symbol}</td>
                 ))}
@@ -46,14 +46,14 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
       </div>
 <ToggleAspectListBtn
   buttonLabel="Aspect List"
-  className="absolute z-20 top-6 left-11/12 w-2xl ml-2"
+  className="sm:absolute z-20 top-6 left-11/12 w-2xl ml-2"
   dropdownClassName="relative top-9 h-[20rem] w-fit overflow-x-hidden rounded-md scrollbar-thin scrollbar-thumb-gray-400" reverseIconOrder={true}
 >
   <table className="no-border-table text-center border-separate border-spacing-0">
     <tbody>
       {aspects.map((aspect, idx) => (
         <tr key={idx}>
-          <td className="px-4 py-1">{aspect.point.name}</td> 
+          <td className="px-4 py-1 ">{aspect.point.name}</td> 
           <td className="px-4 py-1">{aspectSymbols[aspect.aspect.name]}</td>
           <td className="px-4 py-1">{aspect.toPoint.name + "ᵗ"}</td>
         </tr>

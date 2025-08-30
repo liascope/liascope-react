@@ -10,7 +10,7 @@ export default function InfoButtonModal() {
   return (
     <>  <button
         onClick={() => setOpen(true)}
-        className="px-2 hover:text-[#607f6a] absolute text-2xl top-25 right-2/5" > 🛈
+        className="px-2 hover:text-[#607f6a] absolute sm:text-2xl text-xl sm:top-25 sm:right-2/5 top-18 right-2/9" > 🛈
       </button>
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <ModalInfoContent />

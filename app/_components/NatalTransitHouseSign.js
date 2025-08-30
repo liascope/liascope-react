@@ -5,8 +5,8 @@ const {unknownTime} = useAstroForm()
 
 const comparison = generateComparisonTable(natalData, transitData, [unknownTime?.birth, unknownTime?.transit]);
 
-  return <div className="overflow-auto border rounded-md w-full h-fit">
-        <table className="min-w-full text-center border-collapse">
+  return <div className="overflow-none rounded-sm sm:rounded-md sm:w-full h-fit w-screen sm:scale-none scale-[85%] -ml-7 sm:-ml-5 ">
+        <table className="w-full text-center border-collapse">
           <thead>
             <tr>
               <th>Planet</th>

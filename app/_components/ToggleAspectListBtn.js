@@ -25,7 +25,7 @@ export default function ToggleAspectListBtn ({
 
   return (
     <div className={` ${className}`}>
-      <button onClick={() => setIsOpen(!isOpen)} className="btnEffect absolute left-3">
+      <button onClick={() => setIsOpen(!isOpen)} className="btnEffect absolute sm:left-3">
         {`${buttonLabel} ${icon}`}
       </button>
 

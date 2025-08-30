@@ -5,7 +5,7 @@ import { useAstroForm } from "./context/AstroContext";
 import Link from "next/link";
 
 // buttons "Saved Charts", "Go Back", "Edit"+"Your Scope"=go to form
-export default function Button({ type, children, btnSize = "text-[1.5rem] px-4 py-[14px]" }) {
+export default function Button({ type, children, btnSize = "sm:text-[1.5rem] text-sm px-4 sm:py-[14px]" }) {
   const router = useRouter();
   const { formState } = useAstroForm();
 
