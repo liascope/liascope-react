@@ -20,7 +20,7 @@ export default function ModalInfoContent() {
       ))}
       <p className="text-xs text-gray-600 py-5">
         Liascope is for informational and entertainment purposes only. <br />
-        © 2025 Liascope | Developed & Created with ✨ by Zeliha Akin. All rights reserved.
+        © 2025 Liascope | Developed & Created with ✨ All rights reserved.
       </p>
     </div>
   );

@@ -53,11 +53,12 @@ form {
 
 
 .btnEffect {
-   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors duration-300 hover:bg-[#e89b53] w-fit sm:px-5 py-2 px-2
+   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors text-sm sm:text-xl duration-300 hover:bg-[#e89b53] w-fit sm:px-5 py-2 px-2 
 }
 label {
   @apply sm:text-base text-sm
 }
+
 /* SVG Data Attributes */
 [data-name="square"],
 [data-name="opposition"] {

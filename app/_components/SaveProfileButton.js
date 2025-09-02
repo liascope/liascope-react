@@ -44,23 +44,27 @@ export default function SaveProfileButton() {
   }
 
   return (
-    <>
-      {status === "idle" && (
-
-        <button
-          className="text-2xl hover:text-[#e89b53]"
+    <> {status === "idle" && (
+         <svg  className="w-7 h-9"
           onClick={handleSave}
-          title="Save Chart"
-        >
-          ⎙
-        </button>
-        
-      )}
+          title="Save Chart"  viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#4fa091" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none">
+     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
+  </g>
+</svg>)}
       {status === "saved" && (
-        <span className="text-[#607f6a] text-sm ml-2">✔ Saved</span>
+        <svg className="w-7 h-9 " viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#4fa091" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="#4fa091">
+     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
+  </g>
+</svg>
       )}
-      {status === "already" && (
-        <span className="text-gray-500 text-xs ml-2">Already saved</span>
+       {status === "already" && (
+        <svg className="w-7 h-9 " viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="gray" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="gray">
+     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
+  </g>
+</svg>
       )}
       {status === "limit" && (
         <span className="text-[#ca400d] text-xs ml-2">Storage full</span>

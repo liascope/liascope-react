@@ -36,7 +36,7 @@ export default function Charts({ chartID }) {
           buttonLabel="Aspect List"
           className="relative z-1 -mt-25 sm:ml-12 ml-6 right-2"
           position="bottom-1"
-          dropdownClassName="absolute w-fit left-0 p-2 h-[15rem] text-center overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
+          dropdownClassName="absolute w-fit -left-5 sm:left-0 p-2 h-[15rem] text-center overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
         >
           <AspectList data={{ aspectList }} />
         </ToggleAspectListBtn>

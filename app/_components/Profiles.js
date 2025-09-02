@@ -50,21 +50,26 @@ const loadProfile = useCallback((profile) => {
           onClick={() => loadProfile(profile)}
           className="p-4 flex sm:items-center items-end justify-between  w-[90%] sm:w-[70%] h-full bg-[rgb(230,193,85,0.8)] btnGreen"
         >
-          <div className='flex flex-col sm:flex-row gap-3 sm-gap-0 sm:justify-evenly sm:items-center-safe w-full text-xs'>
+          <div className='flex flex-col sm:flex-row gap-1 sm-gap-0 sm:justify-evenly sm:items-center-safe w-full text-xs sm:text-base'>
             <span>Saved <strong> Natal </strong> </span> 
             <span> {profile.formState.user}, {profile.formState.birthDate}, {profile.formState.birthTime}, {profile.formState.birthPlaceData.city} </span> 
              <span> Saved <strong> Transit</strong> </span>
               <span>{profile.formState.transitDate}, {profile.formState.transitTime}, {profile.formState.transitPlaceData.city} </span>
           </div>
           
-          <button className='h-full p-1 sm:p-3 hover:bg-white/80 border rounded-full ml-3' title='delete'
+          <svg className='sm:h-7 sm:w-7 w-6 h-6 text-gray hover:text-red-700' title='delete'
             onClick={(e) => {
               e.stopPropagation(); 
               deleteProfile(profile.id);
-            }}
-          >  🧹
-          </button>
-          
+            }} viewBox="0 0 50 55" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none">
+     <polyline points="2,9 18,9 22,2 30,2 34,9 50,9 9,9"></polyline>
+   <polyline points="3,15 50,15 45,15"></polyline>
+   <polyline points="8,15 14,50 39,50 45,15"></polyline>
+       <line x1="22" y1="42" x2="22" y2="25"/>
+       <line x1="31" y1="42" x2="31" y2="25"/>
+  </g>
+</svg>  
         </div>
       ))}</div>
     </div>);}

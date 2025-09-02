@@ -50,7 +50,7 @@ if ( retro?.transit) {
     <NatalTransitHouseSign natalData={natalData} transitData={transitData}></NatalTransitHouseSign> 
   <AspectTableTransitNatal natalData={natalData} transitData={transitData}></AspectTableTransitNatal> 
   </div><div className='relative'><div className='absolute top-0 sm:left-2 left-0 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-  <div className='sm:block flex items-center justify-center h-svw p-5 sm:p-0 -ml-8 sm:ml-0' id={chartID}/> </div>
+  <div className='sm:block flex items-center justify-center h-svw p-5 sm:p-0 -ml-12 sm:ml-0' id={chartID}/> </div>
   </div>
 }
 

@@ -22,7 +22,7 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
 
   return (
     <div className="flex sm:flex-row flex-col sm:w-fit w-full relative">
-      <div className="overflow-hidden border rounded-md sm:w-[40rem] w-screen scale-[88%] sm:-mt-3 -mt-6 -ml-7">
+      <div className="overflow-hidden sm:rounded-md sm:w-[40rem] w-screen scale-[88%] sm:-mt-3 -mt-6 -ml-7">
         <table className="w-full h-full table-fixed border-collapse text-xs sm:text-md">
           <thead>
             <tr>
@@ -35,7 +35,7 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
           <tbody>
             {aspectMatrix.map((row) => (
               <tr key={row.planet}>
-                <th className="text-[#4fa091] sm:font-bold">{symbols.find((s) => s[1] === row.planet)?.[0]}</th>
+                <th className="text-[#4fa091] font-bold">{symbols.find((s) => s[1] === row.planet)?.[0]}</th>
                 {row.aspects.map((symbol, idx) => (
                   <td className="font-bold" key={idx}>{symbol}</td>
                 ))}
