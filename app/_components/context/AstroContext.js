@@ -63,19 +63,6 @@ useEffect(() => {
   transitTzQuery.data,
 ]);
 
-// get data from calcChart
-// const natalData = useMemo(()=>{if (!formState || !formattedDate || !timeZone.birth) return null;
-//   return calcChart(timeZone?.birth, +formState?.birthPlaceData?.lat, +formState?.birthPlaceData?.lon, formattedDate?.natal, +formState?.natalHouseSystem, unknownTime?.birth)
-// }, [ timeZone, formattedDate, formState, unknownTime])
-// 
-// const transitData = useMemo(()=>{if (!formState || !formattedDate || !timeZone) return null;
-// return calcChart( timeZone?.transit, +formState?.transitPlaceData?.lat, +formState?.transitPlaceData?.lon, formattedDate?.transit, +formState?.transitHouseSystem, unknownTime?.transit,)
-// },[timeZone, formState, unknownTime, formattedDate])
-// 
-// const progressionData = useMemo(()=>{if (!formState || !formattedDate || !timeZone?.birth) return null;
-//   return calcChart(timeZone?.birth,+formState?.birthPlaceData?.lat, +formState?.birthPlaceData?.lon, formattedDate?.progression, +formState?.natalHouseSystem, unknownTime?.birth)
-// }, [ timeZone, formattedDate, formState, unknownTime])
-
 const { natalData, transitData, progressionData } = useMemo(() => {
   if (!formState || !formattedDate || !timeZone?.birth) return {natalData: null, transitData: null, progressionData: null,};
 

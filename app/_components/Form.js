@@ -9,7 +9,6 @@ import { DEFAULT_HOUSE_SYSTEM, DEFAULT_TIME } from "@/app/_lib/config";
 import CityAutoComplete from "./CityAutoComplete";
 import { fetchSuggestions } from "@/app/_lib/data-service";
 import Button from "./Button";
-
 export default function Form() {
   const router = useRouter();
   const { formState, setFormState } = useAstroForm();
@@ -106,8 +105,8 @@ useEffect(() => {
         <CityAutoComplete
           initialValue={`${formState?.birthPlaceData ? `${formState?.birthPlaceData?.city}, ${formState?.birthPlaceData?.country}` : ""}`}
           onSelect={setBirthPlaceData}
-          placeholder="City of Birth:"
-          label="Birth Place"
+          placeholder="City of Birth"
+          label="Birth Place:"
 
         />
         <label htmlFor="natalHs">House System:</label>
@@ -139,12 +138,21 @@ useEffect(() => {
         </label>
 
         <CityAutoComplete
-          initialValue={todaysTransit ? `${transitPlaceData?.city || ""}, ${transitPlaceData?.country || ""}` : formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}` : ""}
+          initialValue={
+    todaysTransit
+      ? transitPlaceData
+        ? `${transitPlaceData.city}, ${transitPlaceData.country}`
+        : ". . ." 
+      : formState?.transitPlaceData
+      ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`
+      : ""
+  }
           onSelect={setTransitPlaceData}
           placeholder="City of Transit"
           label ="Transit Place:"
 
         />
+        
         <label htmlFor="transitHs">House System:</label>
         <select  {...register("transitHouseSystem")} id="transitHs">
           <option value="1">Placidus</option>
