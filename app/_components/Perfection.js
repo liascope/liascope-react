@@ -6,8 +6,7 @@ import { perfectionDegrees } from "@/app/_lib/config"
 import { perfectionSignDescriptions, perfectionHouseDescriptions } from "@/app/_lib/data"
 
 export default function Perfection({chartID}) {
-const {perfectionData, formState} = useAstroForm()
-const {unknwownTime} = useAstroForm();
+const {perfectionData, formState, unknwownTime} = useAstroForm()
 useRenderCharts(chartID)
 if (unknwownTime?.birth) return null;
 

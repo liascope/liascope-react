@@ -14,6 +14,19 @@ const [unknownTime, setUnknownTime] = useState({ birth: false, transit: false,})
 const [chartData, setChartData] = useState(null) // output: positionData: {…}, localTime: 'CEST', utcTime: '28.07.1988 10:11 UTC', retroData: Array()
 const [timeZone, setTimezone] =useState({birth:null, transit:null})
 
+
+useEffect(() => {
+  const saved = sessionStorage.getItem("astroContextData");
+  if (saved) {
+    const parsed = JSON.parse(saved);
+
+    if (parsed.formState) setFormState(parsed.formState);
+    if (parsed.unknownTime) setUnknownTime(parsed.unknownTime);
+    if (parsed.chartData) setChartData(parsed.chartData);
+    if (parsed.timeZone) setTimezone(parsed.timeZone);
+  }
+}, []);
+
 useEffect(() => {
   if (!formState) return;
   // console.log(formState)
@@ -85,6 +98,18 @@ const { natalData, transitData, progressionData } = useMemo(() => {
       perfection: perfectionDate?.perfectionData,
       draconic: calcCuspsDraconic(chartData?.natalData?.positionData),
     };}, [formState, chartData]);
+
+
+useEffect(() => {
+  const dataToSave = {
+    formState,
+    unknownTime,
+    chartData,
+    timeZone,
+  };
+
+  sessionStorage.setItem("astroContextData", JSON.stringify(dataToSave));
+}, [formState, unknownTime, chartData, timeZone]);
 
   return (
     <AstroContext.Provider
