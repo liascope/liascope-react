@@ -6,7 +6,7 @@ export const DEFAULT_TIME = "12:00";
 
 export const settings = {CIRCLE_STRONG: 1,
   COLOR_BACKGROUND: "#ffffff80",
-  COLLISION_RADIUS: 15,POINTS_COLOR: "#000",SIGNS_COLOR: "#000",
+  COLLISION_RADIUS: 15,
           POINTS_TEXT_SIZE: 10,
           MARGIN: 100,
           COLORS_SIGNS: Array(3).fill(["#ce8063", "#c4a484", "#afc8e7", "#4fa091"]).flat(),
@@ -15,6 +15,15 @@ export const settings = {CIRCLE_STRONG: 1,
           DIGNITIES_EXALTATION: "e",
           DIGNITIES_EXACT_EXALTATION: "E",
           DIGNITIES_FALL: "f",
+
+POINTS_COLOR : "#000000",       // immer schwarz
+SIGNS_COLOR : "#000000",        // immer schwarz
+CIRCLE_COLOR : "#333333",       // dunkles Grau
+LINE_COLOR : "#333333",         // dunkles Grau
+SYMBOL_AXIS_FONT_COLOR : "#333333", 
+CUSPS_FONT_COLOR : "#000000",
+
+
         };
 
 export const ASPECTS = [
