@@ -5,7 +5,7 @@ export const DEFAULT_HOUSE_SYSTEM= "1"; // 1: Placidus
 export const DEFAULT_TIME = "12:00";
 
 export const settings = {CIRCLE_STRONG: 1,
-  COLOR_BACKGROUND: "#ffffff80",
+  COLOR_BACKGROUND: "#ffffff10",
   COLLISION_RADIUS: 15,
           POINTS_TEXT_SIZE: 10,
           MARGIN: 100,
@@ -15,15 +15,12 @@ export const settings = {CIRCLE_STRONG: 1,
           DIGNITIES_EXALTATION: "e",
           DIGNITIES_EXACT_EXALTATION: "E",
           DIGNITIES_FALL: "f",
-
-POINTS_COLOR : "#000000",       // immer schwarz
-SIGNS_COLOR : "#000000",        // immer schwarz
-CIRCLE_COLOR : "#333333",       // dunkles Grau
-LINE_COLOR : "#333333",         // dunkles Grau
+POINTS_COLOR : "#000000",       
+SIGNS_COLOR : "#000000",        
+CIRCLE_COLOR : "#333333",       
+LINE_COLOR : "#333333",         
 SYMBOL_AXIS_FONT_COLOR : "#333333", 
 CUSPS_FONT_COLOR : "#000000",
-
-
         };
 
 export const ASPECTS = [
