@@ -4,10 +4,11 @@ export const NOMINATIM_URL= "https://nominatim.openstreetmap.org/search?q="
 export const DEFAULT_HOUSE_SYSTEM= "1"; // 1: Placidus
 export const DEFAULT_TIME = "12:00";
 
-export const settings = {
-          POINTS_TEXT_SIZE: 12,
-          MARGIN: 80,
-          PADDING: 18,
+export const settings = {CIRCLE_STRONG: 1,
+  COLOR_BACKGROUND: "#ffffff80",
+  COLLISION_RADIUS: 15,POINTS_COLOR: "#000",SIGNS_COLOR: "#000",
+          POINTS_TEXT_SIZE: 10,
+          MARGIN: 100,
           COLORS_SIGNS: Array(3).fill(["#ce8063", "#c4a484", "#afc8e7", "#4fa091"]).flat(),
           DIGNITIES_RULERSHIP: "rs",
           DIGNITIES_DETRIMENT: "d",

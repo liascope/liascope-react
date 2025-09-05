@@ -4,10 +4,12 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAstroForm } from './context/AstroContext';
 import Button from './Button';
+import Loader from './Loader';
 
 export function Profiles() {
   const [profiles, setProfiles] = useState([]);
-const {setFormState} = useAstroForm();
+  const [showLoader, setShowLoader] = useState(true)
+const {setFormState, error, loading} = useAstroForm();
 
   // load profile from localStorage 
   useEffect(() => {
@@ -17,7 +19,7 @@ const {setFormState} = useAstroForm();
         const parsed = JSON.parse(stored);
         setProfiles(parsed);
       } catch (error) {
-        console.error('Fehler beim Parsen gespeicherter Profile:', error);
+        console.error('Error parsing stored profiles:', error);
       }
     }
   }, []);
@@ -36,6 +38,16 @@ const loadProfile = useCallback((profile) => {
   setFormState(profile.formState);
   router.push('/charts/natal');
 }, [setFormState, router]);
+   useEffect(() => {
+    if (profiles || error) {
+      const timer = setTimeout(() => {
+        setShowLoader(false);
+      }, 50); 
+      return () => clearTimeout(timer);
+    }
+  }, [profiles, error]);
+
+  if (loading || showLoader) return <Loader></Loader>;
 
   return (
     <div className=' flex flex-col w-full mt-7 '>
@@ -43,6 +55,8 @@ const loadProfile = useCallback((profile) => {
    
       <div className='left-[25%] w-fit relative mt-10'>
    {profiles.length === 0 ? <p>No charts saved. <Button type="btnBack"></Button> </p>  : <Button type="btnBack"></Button>}</div>
+
+
  <div className='flex w-full h-fit items-center flex-col'>
       {profiles.map((profile) => (
         <div

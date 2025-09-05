@@ -8,7 +8,6 @@ export default function SaveProfileButton() {
 
   function handleSave() {
     if (!formState) return;
-
     const newProfileId = `${formState.user}-${formState.birthDate}-${formState.birthTime}`;
     const newProfile = {
       id: newProfileId,
@@ -60,14 +59,22 @@ export default function SaveProfileButton() {
 </svg>
       )}
        {status === "already" && (
-        <svg className="w-7 h-9 " viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="gray" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="gray">
-     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
-  </g>
+        <div className="w-fit h-fit flex flex-row item-center justify-center text-xs text-[#4fa091]"><span className="sm:w-20">
+  Already Saved </span><svg
+  xmlns="http://www.w3.org/2000/svg"
+  className="w-4 h-4"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke="currentColor"
+  strokeWidth={2}
+>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
 </svg>
+
+</div>
       )}
       {status === "limit" && (
-        <span className="text-[#ca400d] text-xs ml-2">Storage full</span>
+        <span className="text-[#ca400d] text-xs ml-2">Storage full!</span>
       )}
     </>
   );

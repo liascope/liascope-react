@@ -5,7 +5,7 @@ export default function AspectTable({ aspect }) {
   const planetNames = symbols.map((s) => s[1]);
 
   return (
-    <table className="table-fixed aspect-table sm:w-[120%] h-full border-collapse text-center scale-80 -mt-10 -ml-12">
+    <table className="table-fixed aspect-table sm:w-full sm:h-[20rem] w-screen h-svw sm:scale-none scale-[90%] border-collapse text-center sm:mt-0 -mt-5">
       <tbody>
         {planetNames.map((planet, i) => {
           const planetAspects = aspect?.filter((a) => a.includes(planet));

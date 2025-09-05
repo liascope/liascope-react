@@ -29,9 +29,10 @@ export default function Charts({ chartID }) {
       transition={{ duration: 0.4 }}
     >
       <div className="sm:w-[35%] w-fit h-fit flex flex-col">
+        <div className="w-screen sm:w-full flex flex-col gap-5">
         <HouseSignList data={{ planetList, cuspList }} />
         <AspectTable aspect={aspect} />
-
+</div>
         <ToggleAspectListBtn
           buttonLabel="Aspect List"
           className="relative z-1 -mt-25 sm:ml-12 ml-6 right-2"
@@ -41,8 +42,8 @@ export default function Charts({ chartID }) {
           <AspectList data={{ aspectList }} />
         </ToggleAspectListBtn>
       </div>
-    <div className='relative'><div className='absolute sm:top-0 top-6 sm:left-2 left-0 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-      <div className='sm:block flex items-center justify-center h-svw p-3 sm:p-0 -ml-8 sm:ml-0'  id={chartID}/> </div>
+    <div className='relative'><div className='absolute sm:top-0 top-6 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
+      <div className='sm:block flex items-center justify-center h-svw'  id={chartID}/> </div>
     </motion.div>
   );
 }

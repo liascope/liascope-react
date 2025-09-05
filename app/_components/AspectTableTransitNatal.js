@@ -22,7 +22,7 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
 
   return (
     <div className="flex sm:flex-row flex-col sm:w-fit w-full relative">
-      <div className="overflow-hidden sm:rounded-md sm:w-[40rem] w-screen scale-[88%] sm:-mt-3 -mt-6 -ml-7">
+      <div className="overflow-hidden sm:rounded-md sm:w-[40rem] sm:h-[40rem]">
         <table className="w-full h-full table-fixed border-collapse text-xs sm:text-md">
           <thead>
             <tr>
@@ -46,7 +46,7 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
       </div>
 <ToggleAspectListBtn
   buttonLabel="Aspect List"
-  className="sm:absolute z-20 top-6 left-11/12 w-2xl ml-2"
+  className="sm:absolute z-20 top-6 left-10/10 w-2xl"
   dropdownClassName="relative top-9 h-[20rem] w-fit overflow-x-hidden rounded-md scrollbar-thin scrollbar-thumb-gray-400" reverseIconOrder={true}
 >
   <table className="no-border-table text-center border-separate border-spacing-0">

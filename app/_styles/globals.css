@@ -39,7 +39,7 @@ h3 {
 input[type="text"],
 input[type="date"],
 input[type="time"] {
-  @apply w-full px-2 py-1 text-xs sm:text-base mb-1 border border-[#e6c155] bg-white/80 rounded-md sm:rounded-2xl text-[darkGrey] flex items-center justify-center;
+  @apply w-full px-2 py-1 text-xs sm:text-base mb-1 border border-[#e6c155] bg-white/80 rounded-md sm:rounded-xl text-[darkGrey] flex items-center justify-center;
 }
 
 input:hover {

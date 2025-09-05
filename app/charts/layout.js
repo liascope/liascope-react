@@ -7,7 +7,7 @@ import InfoTable from "../_components/InfoTable";
 
 export default function ChartsLayout({ children }) {
   return (
-  <div className="overflow-x-hidden flex flex-col-reverse sm:flex sm:flex-row relative w-screen px-6 sm:p-10">
+  <div className="overflow-x-hidden flex flex-col-reverse sm:flex sm:flex-row relative w-screen sm:p-10">
       <div className="sm:flex-1 transition-all duration-500 ease-in-out relative pb-40">
   
 <ToggleAspectListBtn

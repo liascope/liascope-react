@@ -18,7 +18,7 @@ const {unknownTime}=useAstroForm()
   ]
 
   return (
-    <ul className="h-fit w-full">
+    <ul className="h-fit w-full sm:px-0 px-2">
       {links.map(({ href, label }) => {
         const isActive = pathname === href
         return (

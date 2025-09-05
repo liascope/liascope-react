@@ -22,7 +22,7 @@ const index = calculateAge(formState?.birthDate) % 12
     <div className="sm:text-2xl text-md flex flex-col gap-5 sm:gap-10 sm:my-20 space-x-20 px-5 sm:pl-6 "><p><strong className="text-[#4fa091]" >Perfection in the {perfectionHouse}th house </strong> {perfectionHouseDescriptions[perfectionHouse]}</p><p><strong className="text-[#4fa091]"> {perfectionSign}</strong> {perfectionSignDescriptions[perfectionSign]}</p>
 </div>
 
- <div className="relative sm:w-225 sm:h-225 w-screen -ml-5 sm:ml-0">
+ <div className="relative sm:w-225 sm:h-225 w-screen">
     <div className='sm:block flex items-center justify-center h-svw ' id={chartID}></div> 
     {/* <div className="absolute top-[49%] bottom-[49%] left-[49%] right-[49%] z-20"> +</div> */}
      <div style={{ transform: `rotate(${degree}deg)` }} className="absolute w-[93%] h-[24%] sm:w-[88%] sm:h-[33%] bg-[rgb(232,155,83,0.3)] z-10 [clip-path:polygon(50%_50%,_100%_0,_100%_100%)] top-[39%] right-[3%] sm:top-[34%] sm:right-[6%]"></div>  
