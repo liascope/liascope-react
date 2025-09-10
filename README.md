@@ -37,6 +37,9 @@ Transit tools
 * Context API – global state management
 * React Query – efficient data fetching with reusable custom hooks
 * React Hook Form – performant form handling and validation
+*  Custom Loader, Error & Loading Pages – implemented using Next.js conventions
+*  Modal Window – provides additional information in a focused view
+* Custom SVG Icons – handcrafted UI elements
 * Framer Motion – UI animations and transitions
 * Tailwind CSS – utility-first styling
 * SVG – custom icons, handcrafted for the UI
@@ -55,6 +58,9 @@ Transit tools
 * Integrated complex third-party APIs (timezone, nominatim)
 * Rendered astrology charts with precise planetary and cusp calculations
 * Styled a responsive, filterable UI with Tailwind CSS
+* Applied Next.js App Router conventions including custom error and loading pages
+*  Built a custom loader component and implemented a modal window for additional info
+*  Created custom SVG icons for interactive UI elements
 * Worked with APIs and third-party libraries:
    - Integrated an SVG horoscope rendering library and extended it with DOM manipulation to highlight retrograde planets in red.
    - Adapted a planetary calculation library written in a foreign codebase, first understanding its internal logic and then tailoring it to fit seamlessly into my application.
