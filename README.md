@@ -15,7 +15,9 @@ Multi-chart generation
   * Annual Perfection
 
 Save & Load
-  Store up to 5 charts locally via `localStorage`.
+
+  * Store up to 5 charts locally via `localStorage`.
+  * Session persistence: Calculated charts remain available after a page refresh using `sessionStorage`.
 
 Aspect and filter tools
 
@@ -51,7 +53,7 @@ Transit tools
  🧠 What I’ve Learned & Demonstrated
 
 * Cleanly refactored from vanilla‑JS MVC to a robust React/Next.js architecture
-* Implemented global state via Context alongside local caching
+* Implemented persistent chart storage with localStorage and sessionStorage to maintain state across sessions and page refreshes
 * Built multiple custom React Query hooks, managing loading and error states effectively
 * Mastered form state management with React Hook Form
 * Utilized animations and transitions for better user experience
@@ -62,8 +64,8 @@ Transit tools
 *  Built a custom loader component and implemented a modal window for additional info
 *  Created custom SVG icons for interactive UI elements
 * Worked with APIs and third-party libraries:
-   - Integrated an SVG horoscope rendering library and extended it with DOM manipulation to highlight retrograde planets in red.
-   - Adapted a planetary calculation library written in a foreign codebase, first understanding its internal logic and then tailoring it to fit seamlessly into my application.
+   - Integrated an SVG horoscope rendering library and extended it with DOM manipulation to highlight retrograde planets in red
+   - Adapted a planetary calculation library written in a foreign codebase, first understanding its internal logic and then tailoring it to fit seamlessly into my application
 
 
 🔧 Running the Project
