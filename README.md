@@ -39,6 +39,7 @@ Transit tools
 * React Hook Form – performant form handling and validation
 * Framer Motion – UI animations and transitions
 * Tailwind CSS – utility-first styling
+* SVG – custom icons, handcrafted for the UI
 * Astrology libraries – @astrodraw/astrochart, js_astro (extended for custom logic)
 * APIs – Timezone (timezonedb), Location (Nominatim)
 * Utilities – Moment.js, Lodash, Cookies-next
