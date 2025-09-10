@@ -97,3 +97,5 @@ Transit tools
 
 Thanks for exploring Liascope-React.
 Beyond standard frontend practices, this project highlights my ability to extend and adapt third-party libraries, integrate complex APIs, and build an interactive, user-focused application with React and Next.js.
+
+©2025 Zeliha A. (liascope). All rights reserved. Open for personal use; redistribution or modification requires explicit permission.
