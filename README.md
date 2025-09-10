@@ -1,4 +1,4 @@
- Liascope‑React 🌟
+ Liascope Astrology ‑React 🌟
 
 A modern astrology chart viewer built with React.js and Next.js—showing a significant evolution from my earlier vanilla‑JS MVC-based Liascope project. This application demonstrates a solid understanding of frontend development, state management, data fetching, animations, form handling, and interactive UI design.
 
