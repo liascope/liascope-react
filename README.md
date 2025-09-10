@@ -5,16 +5,17 @@ A modern astrology chart viewer built with React.js and Next.js—showing a sign
 🚀 Key Features
 
 Multi-chart generation
-  Generate and view **five distinct charts:
+  Generate and view six distinct charts:
 
   * Natal
+  * Transit
+  * Natal + Transit
   * Draconic
   * Progression
   * Annual Perfection
-  * Natal + Transit
 
 Save & Load
-  Store up to **5 charts locally** via `localStorage`.
+  Store up to 5 charts locally via `localStorage`.
 
 Aspect and filter tools
 
@@ -30,36 +31,33 @@ Transit tools
   Reactivity & animations
   Smooth transitions powered by Framer Motion, and responsive UI behaviors.
 
----
+🧩 Tech Stack
 
-🧩 Tech Stack & Libraries
-
-* Next.js + React.js – full stack React framework
-* Context API – state management across the app
-* React Query – efficient API calls with caching via reusable custom hooks
-* react-hook-form – smooth, performant form handling and validation
-* @astrodraw/astrochart – astrology chart renderer available at astrodraw.github.io - License: MIT License
-* js\_astro – astrology algorithms library used for retrograde, cusps, and planetary positions (excluding Chiron) available on GitHub at astsakai/js_astro - License: MIT License
-* moment + moment-timezone – date and time handling via timezonedb.com - License: TimeZoneDB Terms of Service
-* lodash – helpful utility functions
-* framer-motion – UI animations and transitions
-* nominatim – location/timezone lookup (Nominatim, OpenStreetMap) via nominatim.openstreetmap.org - License: Data Policy
-* cookies‑next – cookie management
-* Tailwind CSS + PostCSS + Autoprefixer – utility-first styling setup
-* ESLint + Prettier – code quality and formatting
-* React Query Devtools– query debugging in development
+* Next.js + React.js – fullstack React framework
+* Context API – global state management
+* React Query – efficient data fetching with reusable custom hooks
+* React Hook Form – performant form handling and validation
+* Framer Motion – UI animations and transitions
+* Tailwind CSS – utility-first styling
+* Astrology libraries – @astrodraw/astrochart, js_astro (extended for custom logic)
+* APIs – Timezone (timezonedb), Location (Nominatim)
+* Utilities – Moment.js, Lodash, Cookies-next
+* Tooling – ESLint, Prettier, React Query Devtools
 
  🧠 What I’ve Learned & Demonstrated
 
 * Cleanly refactored from vanilla‑JS MVC to a robust React/Next.js architecture
-* Implemented global state via Context alongside **local caching**
+* Implemented global state via Context alongside local caching
 * Built multiple custom React Query hooks, managing loading and error states effectively
 * Mastered form state management with React Hook Form
 * Utilized animations and transitions for better user experience
 * Integrated complex third-party APIs (timezone, nominatim)
 * Rendered astrology charts with precise planetary and cusp calculations
 * Styled a responsive, filterable UI with Tailwind CSS
-APIs and third-party libraries
+* Worked with APIs and third-party libraries:
+   - Integrated an SVG horoscope rendering library and extended it with DOM manipulation to highlight retrograde planets in red.
+   - Adapted a planetary calculation library written in a foreign codebase, first understanding its internal logic and then tailoring it to fit seamlessly into my application.
+
 
 🔧 Running the Project
 
@@ -90,6 +88,12 @@ APIs and third-party libraries
 /styles           – Tailwind setup & global styles  
 ```
 
----
+📜 Licenses & Credits 
+* @astrodraw/astrochart – MIT License
+* js_astro – MIT License
+* Moment.js + Moment Timezone – MIT License, TimeZoneDB Terms of Service
+* Nominatim – Data Policy
+* Other libraries – Open source under MIT or compatible licenses
 
-Thanks for checking out Liascope‑React. The app offers a seamless astrology charting experience and highlights proficiency in modern React frontend development—state, data management, UI, animation, and external API integration. Enjoy exploring!
+Thanks for exploring Liascope-React.
+Beyond standard frontend practices, this project highlights my ability to extend and adapt third-party libraries, integrate complex APIs, and build an interactive, user-focused application with React and Next.js.
