@@ -2,8 +2,9 @@
 
 import { createPortal } from 'react-dom';
 import { useEffect, useState } from 'react';
+import ModalInfoContent from './ModalInfoContent';
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -21,7 +22,7 @@ export default function Modal({ isOpen, onClose, children }) {
           ✕
         </button>
         
-        {children}
+      <ModalInfoContent/>
       </div>
     </div>,
     document.body

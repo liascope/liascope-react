@@ -20,9 +20,15 @@ export const dancing = Dancing_Script({
 
 
 export const metadata = {
-  title: "Liascope",
-  description: "Your Sun Your Scope",
+  title: "Liascope Astrology",
+  description: "Your Sun Your Scope", 
+  icons: {
+      icon: "/favicon.png",    
+      shortcut: "/favicon.png",
+      apple: "/favicon.png",
+    },
 };
+  
 
 export default function RootLayout({ children }) {
   return (
