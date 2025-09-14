@@ -10,7 +10,7 @@ return  <header className="bg-white/10 pb-3">
   <div className="w-full sm:h-[15rem] h-[7rem]" >
  <Link href="/"><div className="relative w-full h-full">
         <Image
-          src="/favicon.png"
+          src="/logo.png"
           alt="Logo"
            fill
           style={{ objectFit: "contain" }}
