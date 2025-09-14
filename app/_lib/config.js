@@ -4,7 +4,7 @@ export const NOMINATIM_URL= "https://nominatim.openstreetmap.org/search?q="
 export const DEFAULT_HOUSE_SYSTEM= "1"; // 1: Placidus
 export const DEFAULT_TIME = "12:00";
 
-export const settings = {CIRCLE_STRONG: 1,
+export const settings = {CIRCLE_STRONG: 0.5,
   COLOR_BACKGROUND: "#ffffff10",
   COLLISION_RADIUS: 15,
           POINTS_TEXT_SIZE: 10,
@@ -40,7 +40,9 @@ export const zodiac = { Aries: "♈",Taurus: "♉",Gemini: "♊",Cancer: "♋",L
 
 export const aspectSymbols = {conjunction: "☌", opposition: "☍", square: "□", trine: "△", sextile: "⚹", quincunx: "⚻", semiSextile: "⚺", };
 
- export const dignity = [["rs:", "rulership ☉"],
+ export const dignity = [
+  ["r:", "retrograde"],
+  ["rs:", "rulership ☉"],
     ["d:", "detriment ↓☉"],
     ["e:", "exaltation ☉↑"],
     ["E:", "exact exaltation ☉↑°"],

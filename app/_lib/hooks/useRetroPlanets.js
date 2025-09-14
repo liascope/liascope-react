@@ -16,6 +16,7 @@ useEffect(() => {
         pathname
       )
 
+// svg manipulation for highlighting the retro planets:
 const showRetro = natalRetroPath ? retro?.natal : transitRetroPath ? retro?.transit : progRetroPath ? retro?.progression :null
   if (showRetro) {
     timeout = setTimeout(() => {
@@ -24,17 +25,23 @@ const showRetro = natalRetroPath ? retro?.natal : transitRetroPath ? retro?.tran
       const svg = container.querySelector('svg');
       if (!svg) return;
 
-      showRetro.forEach((retroPlanet) => {
-        const selector = `g#${id}-astrology-radix-planets-${retroPlanet} path`
-        const pathEl = svg.querySelector(selector);
-        if (pathEl) {
-          pathEl.setAttribute('stroke', 'red');
-          pathEl.setAttribute('stroke-width', '2');
-        }
-      });
+     showRetro.forEach((retroPlanet) => {
+  const gEl = svg.querySelector(`g#${id}-astrology-radix-planets-${retroPlanet}`);
+  if (gEl) {
+    // create new 'r' element
+    const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textEl.textContent = "r";
+    textEl.setAttribute("font-weight", "bold");
+    // position of the r-element
+    const bbox = gEl.getBBox();
+    textEl.setAttribute("x", bbox.x + bbox.width + 3);
+    textEl.setAttribute("y", bbox.y + bbox.height / 2); 
+    svg.appendChild(textEl);
+  }
+});
+
     }, 100);
   }
-
   return () => clearTimeout(timeout);
 }, [id, retro, pathname]);}
 

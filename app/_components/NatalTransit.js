@@ -31,13 +31,19 @@ useEffect(()=>{
         }
 if ( retro?.transit) {
       retro.transit.forEach((retroPlanet) => {
-        const selector = `g#${chartID}-astrology-transit-planets-${retroPlanet} path`;
-        const pathEl = svg.querySelector(selector);
-        if (pathEl) {
-          pathEl.setAttribute('stroke', 'red');
-          pathEl.setAttribute('stroke-width', '2');
-        }
-      });
+const gEl = svg.querySelector(`g#${chartID}-astrology-transit-planets-${retroPlanet}`);
+  if (gEl) {
+    // create new 'r' element
+    const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    textEl.textContent = "r";
+    textEl.setAttribute("font-weight", "bold");
+    // position of the r-element
+    const bbox = gEl.getBBox();
+    textEl.setAttribute("x", bbox.x + bbox.width + 3);
+    textEl.setAttribute("y", bbox.y + bbox.height / 2); 
+    svg.appendChild(textEl);
+  }
+ });
   }
      return () => {
     const chart = document.getElementById(chartID);
