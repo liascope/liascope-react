@@ -56,7 +56,7 @@ const gEl = svg.querySelector(`g#${chartID}-astrology-transit-planets-${retroPla
     <NatalTransitHouseSign natalData={natalData} transitData={transitData}></NatalTransitHouseSign> 
   <AspectTableTransitNatal natalData={natalData} transitData={transitData}></AspectTableTransitNatal> 
   </div><div className='relative'><div className='absolute top-0 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-  <div className='sm:block flex items-center justify-center h-svw' id={chartID}/> </div>
+  <div className='sm:block flex items-center justify-center h-svw sm:h-fit' id={chartID}/> </div>
   </div>
 }
 

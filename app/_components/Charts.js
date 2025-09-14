@@ -43,7 +43,7 @@ export default function Charts({ chartID }) {
         </ToggleAspectListBtn>
       </div>
     <div className='relative'><div className='absolute sm:top-0 top-6 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-      <div className='sm:block flex items-center justify-center h-svw'  id={chartID}/> </div>
+      <div className='sm:block flex items-center justify-center h-svw sm:h-fit'  id={chartID}/> </div>
     </motion.div>
   );
 }
