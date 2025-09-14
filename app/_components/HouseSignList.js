@@ -27,7 +27,7 @@ export default function HouseSignList({ data }) {
   }
 
   return (
-    <div className="w-screen sm:w-full flex flex-row justify-evenly ">
+    <div className="w-screen sm:w-full flex flex-row justify-evenly py-7">
       {data.cuspList?.length > 0 && (
         <ul className="pr-4 sm:pr-7 border-r border-gray-300 ">
           {data.cuspList.map((cusp, i) => (

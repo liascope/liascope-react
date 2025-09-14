@@ -55,6 +55,9 @@ form {
 .btnEffect {
    @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors text-sm sm:text-xl duration-300 hover:bg-[#e89b53] w-fit sm:px-5 py-2 px-2 
 }
+.gridContainer {
+  @apply border-e border-b flex items-center justify-center border-gray-300
+}
 label {
   @apply sm:text-base text-sm
 }
