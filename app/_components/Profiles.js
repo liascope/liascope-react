@@ -64,11 +64,11 @@ const loadProfile = useCallback((profile) => {
           onClick={() => loadProfile(profile)}
           className="p-4 flex sm:items-center items-end justify-between  w-[90%] sm:w-[70%] h-full bg-[rgb(230,193,85,0.8)] btnGreen"
         >
-          <div className='flex flex-col sm:flex-row gap-1 sm-gap-0 sm:justify-evenly sm:items-center-safe w-full text-xs sm:text-base'>
-            <span>Saved <strong> Natal </strong> </span> 
-            <span> {profile.formState.user}, {profile.formState.birthDate}, {profile.formState.birthTime}, {profile.formState.birthPlaceData.city} </span> 
-             <span> Saved <strong> Transit</strong> </span>
-              <span>{profile.formState.transitDate}, {profile.formState.transitTime}, {profile.formState.transitPlaceData.city} </span>
+          <div className='flex flex-col sm:flex-row sm:gap-7 gap-1 sm:justify-evenly sm:items-center-safe w-full text-xs sm:text-base'>
+            <span>Saved <strong> Natal: </strong> </span> 
+            <span className='flex-1 border-e border-gray-300'> {profile.formState.user}, {profile.formState.birthDate}, {profile.formState.birthTime}, {profile.formState.birthPlaceData.city.split(',')[0]} </span> 
+             <span> Saved <strong> Transit:</strong> </span>
+              <span className='flex-1'>{profile.formState.transitDate}, {profile.formState.transitTime}, {profile.formState.transitPlaceData.city.split(',')[0]} </span>
           </div>
           
           <svg className='sm:h-7 sm:w-7 w-6 h-6 text-gray hover:text-red-700' title='delete'

@@ -9,8 +9,8 @@ export default function CityAutoComplete({ initialValue, onSelect, placeholder, 
   // initialValue: todaysTransit or previews formState-data
   useEffect(() => {
     if (!isTyping && initialValue) {
-      setTypedValue(initialValue);
-}}, [initialValue, isTyping]);
+      setTypedValue(typedValue);
+}}, [initialValue, isTyping, typedValue]);
 
   // only on typting active fetching suggestions
   useEffect(() => {
