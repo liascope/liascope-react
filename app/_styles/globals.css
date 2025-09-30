@@ -66,27 +66,27 @@ label {
 [data-name="square"],
 [data-name="opposition"] {
   stroke: #ce8063;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 [data-name="trine"] {
   stroke: #4fa091;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 [data-name="sextile"] {
   stroke: #afc8e7;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 [data-name="quincunx"] {
   stroke: #c4a484;
-  stroke-width: 1px;
+  stroke-width: 0.7px;
   stroke-dasharray: 5 3;
 }
 
 [data-name="semiSextile"] {
   stroke: #c4a484;
-  stroke-width: 2px;
+  stroke-width: 0.7px;
   /* stroke-dasharray: 5 2; */
 }
 

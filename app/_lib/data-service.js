@@ -26,7 +26,8 @@ export const fetchTimezone = async (lat, lon) => {
   return data.zoneName
 };
 
-// Getting planet and cusps degrees from API-Call & calc other chart datas, data for table and lists
+// Libary: degree calc (JST) for SVG-Chart Drawing on custom hook 'useRenderChart'
+//  Getting planet and cusps degrees from API-Call return & calc other chart datas, data for table and lists
 export const calcChart = function (timezoneData, lat, lon, dateString, houseSystem, uT) {
   try {
   const asiaTimeZone = (zT) => zT.clone().tz("Asia/Tokyo");

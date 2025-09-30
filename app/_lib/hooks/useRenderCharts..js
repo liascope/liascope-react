@@ -1,4 +1,4 @@
-import { useMemo, useEffect,useState } from "react";
+import { useMemo, useEffect} from "react";
 import { calculateAspects, generateTableAspects, generateAllListData, } from "../data-service";
 import { aspectToSymbol } from "../helper";
 // import * as astrochart from "@astrodraw/astrochart";

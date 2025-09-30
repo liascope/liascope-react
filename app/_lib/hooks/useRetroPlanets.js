@@ -31,7 +31,6 @@ const showRetro = natalRetroPath ? retro?.natal : transitRetroPath ? retro?.tran
     // create new 'r' element
     const textEl = document.createElementNS("http://www.w3.org/2000/svg", "text");
     textEl.textContent = "r";
-    textEl.setAttribute("font-weight", "bold");
     // position of the r-element
     const bbox = gEl.getBBox();
     textEl.setAttribute("x", bbox.x + bbox.width + 3);

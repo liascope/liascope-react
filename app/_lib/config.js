@@ -4,7 +4,7 @@ export const NOMINATIM_URL= "https://nominatim.openstreetmap.org/search?q="
 export const DEFAULT_HOUSE_SYSTEM= "1"; // 1: Placidus
 export const DEFAULT_TIME = "12:00";
 
-export const settings = {CIRCLE_STRONG: 0.5,
+export const settings = {CIRCLE_STRONG: 0.2,
   COLOR_BACKGROUND: "#ffffff10",
   COLLISION_RADIUS: 15,
           POINTS_TEXT_SIZE: 10,
@@ -14,8 +14,8 @@ export const settings = {CIRCLE_STRONG: 0.5,
           DIGNITIES_DETRIMENT: "d",
           DIGNITIES_EXALTATION: "e",
           DIGNITIES_EXACT_EXALTATION: "E",
-          DIGNITIES_FALL: "f",
-POINTS_COLOR : "#000000",       
+          DIGNITIES_FALL: "f",SIGNS_STROKE: 1,CUSPS_STROKE: 0.6,SYMBOL_AXIS_STROKE: 2,POINTS_STROKE: 1.2,
+POINTS_COLOR : "#000000",    
 SIGNS_COLOR : "#000000",        
 CIRCLE_COLOR : "#333333",       
 LINE_COLOR : "#333333",         
@@ -28,12 +28,12 @@ export const ASPECTS = [
   { name: "opposition", angle: 180, orb: 7 },
   { name: "trine", angle: 120, orb: 5 },
   { name: "square", angle: 90, orb: 7 },
-  { name: "sextile", angle: 60, orb: 5 },
+  { name: "sextile", angle: 60, orb: 4 },
   { name: "quincunx", angle: 150, orb: 1 },
   { name: "semiSextile", angle: 30, orb: 1 },
 ];
 
-export  const symbols = [["☉", "Sun"],["☽", "Moon"],["☿", "Mercury"], ["♀", "Venus"],["♂", "Mars"], ["♃", "Jupiter"], ["♄", "Saturn"], ["♅", "Uranus"],["♆", "Neptun"],["♇", "Pluto"],["☊", "NNode"],["☋", "SNode"],["⚸", "Lilith"],["As", "As"], ["MC", "Mc"],];
+export  const symbols = [["☉", "Sun"],["☽", "Moon"],["☿", "Mercury"], ["♀", "Venus"],["♂", "Mars"], ["♃", "Jupiter"], ["♄", "Saturn"], ["♅", "Uranus"],["♆", "Neptune"],["♇", "Pluto"],["☊", "NNode"],["☋", "SNode"],["⚸", "Lilith"],["As", "As"], ["MC", "Mc"],];
 
 export const zodiac = { Aries: "♈",Taurus: "♉",Gemini: "♊",Cancer: "♋",Leo: "♌",Virgo: "♍",Libra: "♎",Scorpio: "♏",Sagittarius: "♐",Capricorn: "♑",Aquarius: "♒",Pisces: "♓",
 };
