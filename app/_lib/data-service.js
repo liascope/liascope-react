@@ -102,13 +102,14 @@ const positionData = {
 export function calcProgressionDate(birthDate) {
       const birthDateObj = new Date(birthDate);
       const now = new Date();
-      let years = now.getFullYear() - birthDateObj.getFullYear();
-      const hasBirthdayPassed =
-        now.getMonth() > birthDateObj.getMonth() || (now.getMonth() === birthDateObj.getMonth() && now.getDate() >= birthDateObj.getDate());
-      if (!hasBirthdayPassed) years--;
+      // calc days based on birthday
+      const age = now.getFullYear() - birthDateObj.getFullYear();
+      // const hasBirthdayPassed =
+      //   now.getMonth() > birthDateObj.getMonth() || (now.getMonth() === birthDateObj.getMonth() && now.getDate() >= birthDateObj.getDate());
+      // if (!hasBirthdayPassed) age--;
       // Progression: Date and Age
       const progressionDate = new Date(birthDateObj);
-      progressionDate.setDate(progressionDate.getDate() + years);
+      progressionDate.setDate(progressionDate.getDate() + age); 
       // const formattedProgressionDate = progressionDate.toLocaleDateString("de-DE");
       const formattedProgressionDate = new Intl.DateTimeFormat("de-DE", {
   day: "2-digit",
