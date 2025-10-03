@@ -5,6 +5,7 @@ import { formatDate } from "@/app/_lib/helper"
 import { useMemo } from "react";
 import Button from "./Button"
 import Loader from "./Loader";
+import Edit from "./navicons/Edit";
 
 export default function NatalTransitInfo() {
  const {formState, chartData} = useAstroForm()
@@ -22,17 +23,15 @@ if (!formState) {
 }
     return<div className=" bg-white/30 backdrop-blur-md p-4 rounded-xl h-fit w-full flex flex-col gap-2">
       <div className="flex flex-row w-full gap-1 sm:justify-between justify-end">
-      <Button type='savedCharts'></Button><div className="h-7 w-0.5 bg-[rgb(232,155,83,0.3)] sm:w-0 mx-3"></div> <Button type='openForm'> <svg className="sm:w-7 sm:h-7 w-6 h-6 mt-0.5 mr-1 sm:mt-0 " viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="currentColor">
-    <polyline points="20,3 7,18 5,25 12,23 25,8 20,3" />
-  </g>
-</svg></Button>
+      <Button type='savedCharts'></Button><div className="h-7 w-0.5 bg-[rgb(232,155,83,0.3)] sm:w-0 mx-3"></div> <Button type='openForm'>
+        <Edit/>
+</Button>
       </div>
      <div className="h-fit p-4 border-gray-300 border-b  ">
 <div className="w-full h-fit  flex flex-row justify-between">
-  <h2 className=" font-bold mb-2 text-[#e89b53] font-[Dancing_Script] text-xl sm:text-3xl">Natal Dates for {formState?.user || "..."}</h2>
+  <h2 className=" font-bold mb-4 text-[#e89b53] tracking-wider font-[Dancing_Script] text-xl sm:text-2xl">Natal Dates for {formState?.user || "..."}</h2>
   <SaveProfileButton></SaveProfileButton></div>
-  <div className="text-xs sm:text-base space-y-2">
+  <div className="text-xs sm:text-sm space-y-3">
     <div className="flex justify-between">
       <span className="font-medium ">Birth Date</span>
       <span>{birthDate || "..."}</span>
@@ -47,15 +46,15 @@ if (!formState) {
     <div className="flex justify-between">
       <span className="font-medium ">Birth Place</span>
   <span>
-  {formState?.birthPlaceData?.city || "..."}, {formState?.birthPlaceData?.country || "..."}
+  {formState?.birthPlaceData?.city.split(',')[0] || "..."}, {formState?.birthPlaceData?.country.split(',')[0] || "..."}
 </span>
 
     </div>
   </div>
 </div>
  <div className=" h-fit sm:p-4 p-1">
-  <h2 className="text-xl sm:text-3xl font-bold mb-2 text-[#e89b53] font-[Dancing_Script]">Transit Dates for {formState?.moment || "..."}</h2>
-  <div className="text-xs sm:text-base space-y-2">
+  <h2 className="text-xl sm:text-2xl tracking-wider font-bold mb-4 text-[#e89b53] font-[Dancing_Script]">Transit Dates for {formState?.moment || "..."}</h2>
+  <div className="text-xs sm:text-sm space-y-3">
     <div className="flex justify-between  ">
       <span className="font-medium ">Transit Date</span>
       <span>{transitDate || "..."}</span>
@@ -69,7 +68,7 @@ if (!formState) {
     <div className="flex justify-between">
       <span className="font-medium">Transit Place</span>
       <span>
-  {formState?.transitPlaceData?.city || "..."}, {formState?.transitPlaceData?.country || "..."}
+  {formState?.transitPlaceData?.city.split(',')[0] || "..."}, {formState?.transitPlaceData?.country.split(',')[0] || "..."}
 </span>
     </div>
   </div>

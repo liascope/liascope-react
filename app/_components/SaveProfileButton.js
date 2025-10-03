@@ -1,6 +1,8 @@
 'use client';
 import { useState } from "react";
 import { useAstroForm } from "./context/AstroContext";
+import Okay from "./navicons/Okay";
+import Saved from "./navicons/Saved";
 
 export default function SaveProfileButton() {
   const { formState } = useAstroForm();
@@ -44,33 +46,13 @@ export default function SaveProfileButton() {
 
   return (
     <> {status === "idle" && (
-         <svg  className="w-7 h-9"
-          onClick={handleSave}
-          title="Save Chart"  viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="#4fa091" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none">
-     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
-  </g>
-</svg>)}
+        <Saved stroke="#4fa091" fill="none" onClick={handleSave}/>)}
       {status === "saved" && (
-        <svg className="w-7 h-9 " viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="#4fa091" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="#4fa091">
-     <polyline points="7,3 7,50 27,30 47,50 47,3 7,3"></polyline>
-  </g>
-</svg>
+        <Saved stroke="#4fa091" fill="#4fa091"/>
       )}
        {status === "already" && (
         <div className="w-fit h-fit flex flex-row item-center justify-center text-xs text-[#4fa091]"><span className="sm:w-20">
-  Already Saved </span><svg
-  xmlns="http://www.w3.org/2000/svg"
-  className="w-4 h-4"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
-  strokeWidth={2}
->
-  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-</svg>
-
+  Already Saved </span><Okay/>
 </div>
       )}
       {status === "limit" && (

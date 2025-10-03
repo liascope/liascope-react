@@ -9,6 +9,8 @@ import { DEFAULT_HOUSE_SYSTEM, DEFAULT_TIME } from "@/app/_lib/config";
 import CityAutoComplete from "./CityAutoComplete";
 import { fetchSuggestions } from "@/app/_lib/data-service";
 import Button from "./Button";
+import RoundArrow from "./navicons/RoundArrow";
+import ChartCircle from "./navicons/ChartCircle";
 export default function Form() {
   const router = useRouter();
   const { formState, setFormState } = useAstroForm();
@@ -146,12 +148,7 @@ useEffect(() => {
       : formState?.transitPlaceData
       ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`
       : ""
-  }
-          onSelect={setTransitPlaceData}
-          placeholder="City of Transit"
-          label ="Transit Place:"
-
-        />
+  } onSelect={setTransitPlaceData} placeholder="City of Transit" label ="Transit Place:"/>
         
         <label htmlFor="transitHs">House System:</label>
         <select  {...register("transitHouseSystem")} id="transitHs">
@@ -167,30 +164,12 @@ useEffect(() => {
       <div className="flex flex-col py-10 sm:py-0 h-full w-fit justify-between">
         <div className="w-fit flex-col flex justify-between h-fit gap-3">
         <Button type='savedCharts'></Button>
-         
-
-<div className="btnEffect flex flex-row items-center gap-2" onClick={() => setTodaysTransit(!todaysTransit)}  >
-  
-  <span>Transits Now</span><svg className="w-4 h-4 sm:w-6 sm:h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"  fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="3" >
- <path d="M20 10 A20 20 10 1 1 10 20" /> <polyline points="14,27 12,17 2,21" />
-</svg>
+     <div className="btnEffect flex flex-row items-center gap-2" onClick={() => setTodaysTransit(!todaysTransit)}  >
+  <span>Transits Now</span> <RoundArrow/>
 </div>
- </div>
-        <button type="submit" className="text-sm sm:text-xl btnEffect "><span className="flex flex-row items-center gap-1"><span>
-          Show Charts </span> <svg className="sm:w-7 sm:h-7 w-5 h-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140"  fill="none" strokeWidth="12">
-  <path d="M75 15
-           A60 60 0 0 1 135 75"
-        stroke="#ce8063" />
-  <path d="M135 75
-           A60 60 0 0 1 75 135"
-        stroke="#c4a484" />
-  <path d="M75 135
-           A60 60 0 0 1 15 75"
-        stroke="#afc8e7" />
-  <path d="M15 75
-           A60 60 0 0 1 75 15"
-        stroke="#4fa091" />
-</svg></span>
+ </div> <button type="submit" className="text-sm sm:text-xl btnEffect "><span className="flex flex-row items-center gap-1"><span>
+          Show Charts </span> <ChartCircle/>
+          </span>
         </button>
       </div>
     </form></div>

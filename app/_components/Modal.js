@@ -14,14 +14,12 @@ export default function Modal({ isOpen, onClose }) {
   return createPortal(
     <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white max-w-2xl w-full p-6 rounded-lg shadow-lg relative overflow-y-auto max-h-[90vh]">
-
         <button
           onClick={onClose}
           className="fixed  hover:text-black"
         >
           ✕
         </button>
-        
       <ModalInfoContent/>
       </div>
     </div>,

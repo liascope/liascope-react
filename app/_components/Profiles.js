@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAstroForm } from './context/AstroContext';
 import Button from './Button';
 import Loader from './Loader';
+import Trash from './navicons/Trash';
 
 export function Profiles() {
   const [profiles, setProfiles] = useState([]);
@@ -50,12 +51,11 @@ const loadProfile = useCallback((profile) => {
   if (loading || showLoader) return <Loader></Loader>;
 
   return (
-    <div className=' flex flex-col w-full mt-7 '>
+    <div className=' flex flex-col w-full min-h-screen mt-7'>
        <h2 className="sm:tracking-wide text-md sm:text-2xl sm:mx-[4rem] text-center text-[#e89b53]">Saved Charts || you can save up to 5 charts.</h2>
    
       <div className='left-[25%] w-fit relative mt-10'>
    {profiles.length === 0 ? <p>No charts saved. <Button type="btnBack"></Button> </p>  : <Button type="btnBack"></Button>}</div>
-
 
  <div className='flex w-full h-fit items-center flex-col'>
       {profiles.map((profile) => (
@@ -70,20 +70,7 @@ const loadProfile = useCallback((profile) => {
              <span> Saved <strong> Transit:</strong> </span>
               <span className='flex-1'>{profile.formState.transitDate}, {profile.formState.transitTime}, {profile.formState.transitPlaceData.city.split(',')[0]} </span>
           </div>
-          
-          <svg className='sm:h-7 sm:w-7 w-6 h-6 text-gray hover:text-red-700' title='delete'
-            onClick={(e) => {
-              e.stopPropagation(); 
-              deleteProfile(profile.id);
-            }} viewBox="0 0 50 55" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none">
-     <polyline points="2,9 18,9 22,2 30,2 34,9 50,9 9,9"></polyline>
-   <polyline points="3,15 50,15 45,15"></polyline>
-   <polyline points="8,15 14,50 39,50 45,15"></polyline>
-       <line x1="22" y1="42" x2="22" y2="25"/>
-       <line x1="31" y1="42" x2="31" y2="25"/>
-  </g>
-</svg>  
+          <Trash onClick={(e) => {e.stopPropagation();  deleteProfile(profile.id);}}/>
         </div>
       ))}</div>
     </div>);}

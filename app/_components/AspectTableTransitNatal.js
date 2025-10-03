@@ -86,8 +86,6 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
   </div>
 </div>
 
-
-
 <ToggleAspectListBtn
   buttonLabel="Aspect List"
   className="sm:absolute z-20 top-6 left-10/10 w-2xl"

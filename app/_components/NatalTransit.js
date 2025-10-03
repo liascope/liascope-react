@@ -10,13 +10,11 @@ import useRetroPlanets from '@/app/_lib/hooks/useRetroPlanets';
 import { calculateAspectsBetweenCharts } from '@/app/_lib/data-service';
 import AspectFilter from './AspectFilter';
 
-
 export default function NatalTransit({chartID}) {  
 const { natalData, transitData, unknownTime, retro} = useAstroForm()
 
 useTimeunknown(chartID, unknownTime)
 useRetroPlanets(chartID, retro)
-
 useEffect(()=>{
          const natalTransit = new astrochart.Chart("natalTransit", 750, 750, settings); 
          natalTransit.radix(natalData).transit(transitData).aspects(calculateAspectsBetweenCharts(natalData, transitData))

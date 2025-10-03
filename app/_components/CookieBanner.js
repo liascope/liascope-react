@@ -34,16 +34,12 @@ const pathname = usePathname();
           Privacy Policy
         </a>.
       </p>
-
-
       <button
         onClick={handleConsent}
         className="px-4 py-2 btnGreen bg-[rgb(220,193,85,0.8)]"
       >
         Got it!
       </button>
-
-      
     </div>
   )
 }

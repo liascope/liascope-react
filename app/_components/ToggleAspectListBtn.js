@@ -11,14 +11,12 @@ export default function ToggleAspectListBtn ({
   reverseIconOrder = false
 }) {
   const [isOpen, setIsOpen] = useState(false);
-
   const fadeZoom = {
     initial: { opacity: 0, scale: 0.95 },
     animate: { opacity: 1, scale: 1 },
     exit: { opacity: 0, scale: 0.95 },
     transition: { duration: 0.2 },
   };
-
  const icon = reverseIconOrder
     ? isOpen ?  "▲" : "▼"
     : isOpen ? "▼" : "▲"
@@ -28,7 +26,6 @@ export default function ToggleAspectListBtn ({
       <button onClick={() => setIsOpen(!isOpen)} className="btnEffect absolute sm:left-3">
         {`${buttonLabel} ${icon}`}
       </button>
-
       <AnimatePresence>
         {isOpen && (
           <motion.div
