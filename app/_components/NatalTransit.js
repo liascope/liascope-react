@@ -1,6 +1,6 @@
 'use client'
 import * as astrochart from '@astrodraw/astrochart';
-import { useAstroForm } from './context/AstroContext';
+import { useAstroForm } from '../_lib/context/AstroContext';
 import { useEffect } from 'react';
 import AspectTableTransitNatal from './AspectTableTransitNatal';
 import { settings } from '@/app/_lib/config';

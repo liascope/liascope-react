@@ -3,7 +3,7 @@ import { calculateAspects, generateTableAspects, generateAllListData, } from "..
 import { aspectToSymbol } from "../helper";
 // import * as astrochart from "@astrodraw/astrochart";
 import { settings, zodiac } from "../config";
-import { useAstroForm } from "@/app/_components/context/AstroContext";
+import { useAstroForm } from "@/app/_lib/context/AstroContext";
 
 // Custom Hook for SVG Chart & Aspect Table
 export function useRenderCharts(chartID) {

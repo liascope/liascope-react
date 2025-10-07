@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useAstroForm } from "./context/AstroContext"
+import { useAstroForm } from "../_lib/context/AstroContext"
 
 export default function Navigation() {
   const pathname = usePathname()

@@ -1,6 +1,6 @@
 'use client'
  import { useRenderCharts } from "@/app/_lib/hooks/useRenderCharts."
-import { useAstroForm } from "./context/AstroContext"
+import { useAstroForm } from "../_lib/context/AstroContext"
 import { findSign, calculateAge } from "@/app/_lib/helper"
 import { perfectionDegrees } from "@/app/_lib/config"
 import { perfectionSignDescriptions, perfectionHouseDescriptions } from "@/app/_lib/data"

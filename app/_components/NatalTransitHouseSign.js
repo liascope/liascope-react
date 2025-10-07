@@ -1,5 +1,5 @@
 import { generateComparisonTable } from "@/app/_lib/data-service";
-import { useAstroForm } from "./context/AstroContext";
+import { useAstroForm } from "../_lib/context/AstroContext";
 export default function NatalTransitHouseSign ({natalData, transitData}) {
 const {unknownTime} = useAstroForm()
 
