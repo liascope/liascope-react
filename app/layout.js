@@ -4,6 +4,7 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import Provider from "./_components/Provider";
 import CookieBanner from "./_components/CookieBanner";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -20,8 +21,9 @@ export const dancing = Dancing_Script({
 
 
 export const metadata = {
-  title: "Liascope Astrology",
-  description: "Your Sun Your Scope", 
+  title: { template:"%s | Liascope Astrology",
+    default: 'Liascope Astrology',
+  description: "Your Sun Your Scope", },
   icons: {
       icon: "/favicon.png",    
       shortcut: "/favicon.png",

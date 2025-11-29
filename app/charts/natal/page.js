@@ -1,5 +1,10 @@
 
 import Charts from "@/app/_components/Charts"
+
+export const metadata = {
+  title: 'Natal'
+};
+
 export default function Page() {   
 
   return (
