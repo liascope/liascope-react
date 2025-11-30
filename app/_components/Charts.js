@@ -25,7 +25,7 @@ export default function Charts({ chartID }) {
       className="flex sm:flex-row flex-col-reverse w-screen sm:w-full justify-between"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
+      exit={{ opacity: 0, y: -7 }}
       transition={{ duration: 0.4 }}
     >
       <div className="sm:w-[35%] w-fit h-fit flex flex-col">

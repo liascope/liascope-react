@@ -2,9 +2,9 @@
 
 import { createContext, useContext, useState, useMemo, useEffect,} from 'react';
 import { calcProgressionDate, calcCuspsDraconic, perfectionChart, calcChart } from '@/app/_lib/data-service';
-import { useTimezone } from '@/app/_lib/hooks/useTimezone';
 import { formatDateTime, calculateAge } from '@/app/_lib/helper';
 import { DEFAULT_TIME } from '@/app/_lib/config';
+import { fetchTimezone } from '@/app/_lib/data-service';
 
 const AstroContext = createContext();
 
@@ -13,7 +13,6 @@ const [formState, setFormState] = useState(null);
 const [unknownTime, setUnknownTime] = useState({ birth: false, transit: false,});
 const [chartData, setChartData] = useState(null) // output: positionData: {…}, localTime: 'CEST', utcTime: '28.07.1988 10:11 UTC', retroData: Array()
 const [timeZone, setTimezone] =useState({birth:null, transit:null})
-
 
 useEffect(() => {
   const saved = sessionStorage.getItem("astroContextData");
@@ -29,7 +28,7 @@ useEffect(() => {
 
 useEffect(() => {
   if (!formState) return;
-  // console.log(formState)
+   console.log(formState)
   setUnknownTime({
     birth: !!formState.birthTimeUnknown,
     transit: !!formState.transitTimeUnknown,
@@ -48,39 +47,31 @@ useEffect(() => {
     };
   }, [formState, unknownTime]);
 
-const natalAndProgressionTzQuery = useTimezone(
-  "natalProgression",
-  +formState?.birthPlaceData?.lat,
-  +formState?.birthPlaceData?.lon
-);
-const transitTzQuery = useTimezone(
-  "transit",
-  +formState?.transitPlaceData?.lat,
-  +formState?.transitPlaceData?.lon
-);
-
 useEffect(() => {
-  if (
-    natalAndProgressionTzQuery.isSuccess &&
-    transitTzQuery.isSuccess
-  ) {
-    setTimezone({
-      birth: natalAndProgressionTzQuery.data,
-      transit: transitTzQuery.data,
-    });
-  }
-}, [
-  natalAndProgressionTzQuery.isSuccess,
-  natalAndProgressionTzQuery.data,
-  transitTzQuery.isSuccess,
-  transitTzQuery.data,
-]);
+  if (!formState?.birthPlaceData || !formState?.transitPlaceData) return;
+
+  const fetchTimezones = async () => {
+    try {
+      const [birthTz, transitTz] = await Promise.all([
+        fetchTimezone(+formState.birthPlaceData.lat, +formState.birthPlaceData.lon),
+        fetchTimezone(+formState.transitPlaceData.lat, +formState.transitPlaceData.lon),
+      ]);
+
+      setTimezone({ birth: birthTz, transit: transitTz });
+    } catch (error) {
+      console.error("Timezone fetch failed:", error);
+      setTimezone({ birth: null, transit: null });
+    }
+  };
+
+  fetchTimezones();
+}, [formState]);
 
 const { natalData, transitData, progressionData } = useMemo(() => {
   if (!formState || !formattedDate || !timeZone?.birth) return {natalData: null, transitData: null, progressionData: null,};
 
   return {
-    natalData: calcChart(timeZone.birth, +formState.birthPlaceData.lat, +formState.birthPlaceData.lon, formattedDate.natal, +formState.natalHouseSystem, unknownTime?.birth),
+    natalData: calcChart(timeZone.birth, +formState?.birthPlaceData.lat, +formState.birthPlaceData?.lon, formattedDate.natal, +formState.natalHouseSystem, unknownTime?.birth),
     transitData: calcChart(timeZone.transit, +formState.transitPlaceData.lat, +formState.transitPlaceData.lon, formattedDate.transit, +formState.transitHouseSystem, unknownTime?.transit),
     progressionData: calcChart(timeZone.birth, +formState.birthPlaceData.lat, +formState.birthPlaceData.lon, formattedDate.progression, +formState.natalHouseSystem, unknownTime?.birth),
   };
@@ -99,15 +90,8 @@ const { natalData, transitData, progressionData } = useMemo(() => {
       draconic: calcCuspsDraconic(chartData?.natalData?.positionData),
     };}, [formState, chartData]);
 
-
 useEffect(() => {
-  const dataToSave = {
-    formState,
-    unknownTime,
-    chartData,
-    timeZone,
-  };
-
+  const dataToSave = {formState, unknownTime, chartData,timeZone,};
   sessionStorage.setItem("astroContextData", JSON.stringify(dataToSave));
 }, [formState, unknownTime, chartData, timeZone]);
 
@@ -128,8 +112,6 @@ useEffect(() => {
       transit: chartData?.transitData?.retroData || [],
       progression: chartData?.progressionData?.retroData || [],
     },
-       loading: natalAndProgressionTzQuery.isLoading || transitTzQuery.isLoading,
-       error: natalAndProgressionTzQuery.error || transitTzQuery.error 
       }}
     >
       {children}

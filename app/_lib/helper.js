@@ -70,7 +70,8 @@ export function getInitialTransitData() {
   const transitTime = `${formatNumber(now.getHours())}:${formatNumber(now.getMinutes())}`;
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const transitPlace = timeZone.includes("/") && timeZone.split("/").pop()
+  const transitPlace = timeZone.split("/").pop().replace("_", " ");
+  // timeZone.includes("/") && timeZone.split("/").pop()
   return {
     transitDate,
     transitTime,

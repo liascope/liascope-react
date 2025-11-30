@@ -1,33 +1,26 @@
+'use client'
+
 import { useState, useEffect } from "react";
-import { fetchSuggestions } from "@/app/_lib/data-service";
+import { useAutofillPlace } from "../_lib/hooks/useAutofillPlace";
 
 export default function CityAutoComplete({ initialValue, onSelect, placeholder, label }) {
   const [typedValue, setTypedValue] = useState(initialValue || "");
-   const [suggestions, setSuggestions] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
+  const [debouncedValue, setDebouncedValue] = useState(typedValue);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // initialValue: todaysTransit or previews formState-data
   useEffect(() => {
-    if (!isTyping && initialValue) {
-      setTypedValue(typedValue);
-}}, [initialValue, isTyping, typedValue]);
+    if (initialValue) setTypedValue(initialValue);
+  }, [initialValue]);
 
-  // only on typting active fetching suggestions
+  // debounce
   useEffect(() => {
- if (!isTyping || !typedValue) {
-    setSuggestions([]);
-    return;
-  }
-  const handler = setTimeout(async () => {
-    try {
-      const data = await fetchSuggestions(typedValue);
-      setSuggestions(data || []);
-    } catch {
-      setSuggestions([]);
-    }
-  }, 300);
+    const handler = setTimeout(() => setDebouncedValue(typedValue), 300);
     return () => clearTimeout(handler);
-  }, [typedValue, isTyping]);
+  }, [typedValue]);
+
+  // fetch suggestions using debounced value
+  const { data } = useAutofillPlace("transitPlace", debouncedValue);
+  const suggestions = Array.isArray(data) ? data : [];
 
   const handleSelect = (item) => {
     const cityName =
@@ -38,8 +31,7 @@ export default function CityAutoComplete({ initialValue, onSelect, placeholder, 
 
     const fullLabel = `${cityName}, ${item.address.country}`;
     setTypedValue(fullLabel);
-    setIsTyping(false);
-    setSuggestions([]);
+    setShowSuggestions(false);
     onSelect({
       city: cityName,
       country: item.address.country,
@@ -50,7 +42,8 @@ export default function CityAutoComplete({ initialValue, onSelect, placeholder, 
 
   return (
     <div className="relative">
-       <label htmlFor={label.toLowerCase().replace(/\s+/g, "-")}>{label}</label>
+      <label htmlFor={label.toLowerCase().replace(/\s+/g, "-")}>{label}</label>
+
       <input
         type="text"
         id={label.toLowerCase().replace(/\s+/g, "-")}
@@ -58,18 +51,26 @@ export default function CityAutoComplete({ initialValue, onSelect, placeholder, 
         placeholder={placeholder}
         onChange={(e) => {
           setTypedValue(e.target.value);
-          setIsTyping(true);}}
+          setShowSuggestions(true);
+        }}
         className="w-full"
         autoComplete="off"
-        required/>
-      {suggestions.length > 0 && (
-        <ul className="absolute bg-white border border-[#ce8063] rounded-md scrollbar-thin scrollbar-thumb-gray-100 w-full max-h-50 overflow-y-auto m-0 p-0 list-none z-40" >
+        required
+      />
+
+      {showSuggestions && typedValue && suggestions.length > 0 && (
+        <ul className="absolute bg-white border border-[#ce8063] rounded-md scrollbar-thin scrollbar-thumb-gray-100 w-full max-h-50 overflow-y-auto m-0 p-0 list-none z-40">
           {suggestions.map((item) => (
             <li
               key={item.place_id}
               onClick={() => handleSelect(item)}
-              className="p-[0.5rem] cursor-pointer">
+              className="p-[0.5rem] cursor-pointer hover:bg-gray-100"
+            >
               {item.display_name}
-            </li>))}
-        </ul>)}
-    </div>);}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}

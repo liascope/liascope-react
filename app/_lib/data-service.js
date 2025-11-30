@@ -21,7 +21,6 @@ export const fetchSuggestions = async (query) => {
 // for chart-data calc
 export const fetchTimezone = async (lat, lon) => {
   const url = `${TIMEZONE_API_BASE_URL}key=${process.env.NEXT_PUBLIC_TIME_API_KEY}&format=json&by=position&lat=${lat}&lng=${lon}`;
-  // `${getLink.timezoneUrl}lat=${lat}&lng=${lon}&username=${userName}`;
   const data =  await fetchData(url, "Timezone data not found");
   return data.zoneName
 };

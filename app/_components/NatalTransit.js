@@ -1,5 +1,6 @@
 'use client'
 import * as astrochart from '@astrodraw/astrochart';
+import { motion } from 'framer-motion';
 import { useAstroForm } from '../_lib/context/AstroContext';
 import { useEffect } from 'react';
 import AspectTableTransitNatal from './AspectTableTransitNatal';
@@ -48,12 +49,20 @@ const gEl = svg.querySelector(`g#${chartID}-astrology-transit-planets-${retroPla
   };
     },[natalData, transitData, unknownTime, retro, chartID])
 
-  return <div className='flex flex-col-reverse sm:flex-row justify-around w-screen sm:w-full h-fit relative'>
+  return (
+     <motion.div
+      className="w-screen sm:w-full"
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -4 }}
+      transition={{ duration: 0.4 }}
+    >
+  <div className='flex flex-col-reverse sm:flex-row justify-around w-screen sm:w-full h-fit relative'>
   <div className='flex flex-col sm:items-baseline items-center sm:w-[40rem] h-fit gap-5 w-screen p-2'> 
     <NatalTransitHouseSign natalData={natalData} transitData={transitData}></NatalTransitHouseSign> 
   <AspectTableTransitNatal natalData={natalData} transitData={transitData}></AspectTableTransitNatal> 
   </div><div className='relative'><div className='absolute top-0 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
   <div className='sm:block flex items-center justify-center h-svw sm:h-fit' id={chartID}/> </div>
-  </div>
+  </div></motion.div>)
 }
 

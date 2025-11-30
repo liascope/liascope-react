@@ -1,30 +1,31 @@
 'use client';
 
-import { useMemo, useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { getInitialTransitData } from "@/app/_lib/helper";
-import { useAstroForm } from "../_lib/context/AstroContext";
-import { DEFAULT_HOUSE_SYSTEM, DEFAULT_TIME } from "@/app/_lib/config";
-import CityAutoComplete from "./CityAutoComplete";
-import { fetchSuggestions } from "@/app/_lib/data-service";
 import Button from "./Button";
 import RoundArrow from "./navicons/RoundArrow";
 import ChartCircle from "./navicons/ChartCircle";
+import CityAutoComplete from "./CityAutoComplete";
+import { DEFAULT_HOUSE_SYSTEM, DEFAULT_TIME } from "@/app/_lib/config";
+import { getInitialTransitData } from "@/app/_lib/helper";
+
+import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+
+import { useAstroForm } from "../_lib/context/AstroContext";
+import { useAutofillPlace } from "../_lib/hooks/useAutofillPlace";
+
+
 export default function Form() {
   const router = useRouter();
   const { formState, setFormState } = useAstroForm();
-  const [todaysTransit, setTodaysTransit] = useState(false);
+  const [autoFillPlace, setAutoFillPlace] = useState(null);
+  const transitAutoFill = useAutofillPlace("transitPlace", autoFillPlace);
 
   const [birthPlaceData, setBirthPlaceData] = useState(null);
   const [transitPlaceData, setTransitPlaceData] = useState(null);
-  const initialTransit = useMemo(() => todaysTransit && getInitialTransitData(), [todaysTransit]);
+  const initialTransit = getInitialTransitData()
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-  } = useForm({
+  const { register, handleSubmit, setValue, } = useForm({
     defaultValues: {
       user: formState?.user || "",
       birthDate: formState?.birthDate || "",
@@ -50,24 +51,33 @@ useEffect(() => {
   }
 }, [birthPlaceData, transitPlaceData, setValue]);
 
-// todaysTransits 
-  useEffect(() => { if (!todaysTransit) return;
-      setValue("transitDate", initialTransit.transitDate);
-      setValue("transitTime", initialTransit.transitTime);
-     const todaysPlace = async () => {
-    const data = await fetchSuggestions(initialTransit.transitPlace);
-   setTransitPlaceData({
-        city: data[0].address.city,
-        country: data[0].address.country,
-        lat: data[0].lat,
-        lon: data[0].lon,
-      });
-  };
-  todaysPlace();
-    }
-  , [todaysTransit, initialTransit, setValue]);
+useEffect(() => {
+  if (transitAutoFill.data?.[0]) {
+    const p = transitAutoFill.data[0];
+    const place = {
+      city: p.address.city,
+      country: p.address.country,
+      lat: p.lat,
+      lon: p.lon,
+    };
+    setTransitPlaceData(place);
+    setValue("transitPlaceData", place);
+  }
 
-  const onSubmit = (data) => {
+}, [transitAutoFill.data, setValue]);
+
+// todaysTransits 
+function handleTodays() {
+  const initial = getInitialTransitData();
+
+  setValue("transitDate", initial.transitDate);
+  setValue("transitTime", initial.transitTime);
+
+  // trigger API-Request
+  setAutoFillPlace(initial.transitPlace);
+}
+
+  const onSubmit = async (data) => {
     if (data.birthTimeUnknown) {
       data.birthTime = DEFAULT_TIME;
     }
@@ -129,7 +139,7 @@ useEffect(() => {
         <input {...register("moment")} id="moment" type="text" placeholder="Transit moment" />
 
         <label htmlFor="transitDate">Transit Date:</label>
-        <input {...register("transitDate")} id="transitDate" type="date" required />
+       <input type="date" {...register("transitDate")}/>
 
         <label htmlFor="transitTime">Transit Time:</label>
         <input {...register("transitTime")} id="transitTime" type="time" />
@@ -140,15 +150,8 @@ useEffect(() => {
         </label>
 
         <CityAutoComplete
-          initialValue={
-    todaysTransit
-      ? transitPlaceData
-        ? `${transitPlaceData.city}, ${transitPlaceData.country}`
-        : ". . ." 
-      : formState?.transitPlaceData
-      ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`
-      : ""
-  } onSelect={setTransitPlaceData} placeholder="City of Transit" label ="Transit Place:"/>
+       initialValue={transitPlaceData ? `${transitPlaceData.city}, ${transitPlaceData.country}` : formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}` : ''}
+       onSelect={setTransitPlaceData} placeholder="City of Transit" label ="Transit Place:"/>
         
         <label htmlFor="transitHs">House System:</label>
         <select  {...register("transitHouseSystem")} id="transitHs">
@@ -164,14 +167,14 @@ useEffect(() => {
       <div className="flex flex-col py-10 sm:py-0 h-full w-fit justify-between">
         <div className="w-fit flex-col flex justify-between h-fit gap-3">
         <Button type='savedCharts'></Button>
-     <div className="btnEffect flex flex-row items-center gap-2" onClick={() => setTodaysTransit(!todaysTransit)}  >
-  <span>Transits Now</span> <RoundArrow/>
-</div>
- </div> <button type="submit" className="text-sm sm:text-xl btnEffect "><span className="flex flex-row items-center gap-1"><span>
+     <div className="btnEffect flex flex-row items-center gap-2" onClick={() => handleTodays()}  >
+       <span>Transits Now</span> <RoundArrow/>
+     </div>
+      </div> <button type="submit" className="text-sm sm:text-xl btnEffect "><span className="flex flex-row items-center gap-1"><span>
           Show Charts </span> <ChartCircle/>
           </span>
         </button>
       </div>
-    </form></div>
+     </form></div>
   );
 }
