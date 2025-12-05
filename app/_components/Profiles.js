@@ -11,6 +11,7 @@ export function Profiles() {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+ 
 
   const { setFormState } = useAstroForm();
   const router = useRouter();
@@ -73,7 +74,7 @@ export function Profiles() {
     <div
       key={profile.id}
       onClick={() => loadProfile(profile)}
-      className="p-4 flex sm:items-center items-end justify-between w-[90%] sm:w-[70%] bg-[rgb(230,193,85,0.8)] btnGreen cursor-pointer"
+      className="relative p-4 flex sm:items-center items-end justify-between w-[90%] sm:w-[70%] bg-[rgb(230,193,85,0.8)] btnGreen cursor-pointer"
     >
       <div className="flex flex-col sm:flex-row sm:gap-7 gap-1 w-full text-xs sm:text-base">
         <span>Saved <strong>Natal:</strong></span>

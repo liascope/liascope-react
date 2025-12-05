@@ -32,7 +32,7 @@ export default function Charts({ chartID }) {
         <div className="w-screen sm:w-full flex flex-col gap-5">
         <HouseSignList data={{ planetList, cuspList }} />
         <AspectTable aspect={aspect} />
-</div>
+       </div>
         <ToggleAspectListBtn
           buttonLabel="Aspect List"
           className="relative z-1 -mt-15 sm:ml-12 ml-6 right-2"
@@ -43,7 +43,7 @@ export default function Charts({ chartID }) {
         </ToggleAspectListBtn>
       </div>
     <div className='relative'><div className='absolute sm:top-0 top-6 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-      <div className='sm:block flex items-center justify-center h-svw sm:h-fit'  id={chartID}/> </div>
+      <div className='sm:block flex items-center justify-center h-svw sm:h-fit' id={chartID}/> </div>
     </motion.div>
   );
 }

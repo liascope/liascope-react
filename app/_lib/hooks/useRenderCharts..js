@@ -9,36 +9,25 @@ import { useAstroForm } from "@/app/_lib/context/AstroContext";
 export function useRenderCharts(chartID) {
   const context = useAstroForm();
 
-  const data = useMemo(() => context[`${chartID}Data`] ?? null, [chartID, context]);
+  const data = context[`${chartID}Data`] ?? null;
 
   // Chart Rendering
- useEffect(() => {
-  if (!data) return;
+ useEffect(() => {if (!data) return;
 
   let chartInstance;
 //dynamic import:
   import('@astrodraw/astrochart').then((astrochart) => {const el = document.getElementById(chartID);
   if (el) el.innerHTML = "";
     const chart = new astrochart.Chart(chartID, 900, 900, settings);zodiac
-    chartID === "perfection"
-      ? chart.radix(data)
-      : chart.radix(data).aspects(calculateAspects(data));
-
+    chartID === "perfection" ? chart.radix(data) : chart.radix(data).aspects(calculateAspects(data));
     chartInstance = chart;
   });
 
-  return () => {
-    const el = document.getElementById(chartID);
-    if (el) el.innerHTML = "";
-    chartInstance = null;
-  };
+  return () => {const el = document.getElementById(chartID); if (el) el.innerHTML = ""; chartInstance = null; };
 }, [data, chartID]);
 
   // Aspects Table
-  const aspect = useMemo(() => {
-    if (!data) return [];
-    return generateTableAspects(data);
-  }, [data]);
+  const aspect = useMemo(() => { if (!data) return []; return generateTableAspects(data);}, [data]);
 
   const aspectList = useMemo(() => aspectToSymbol(aspect), [aspect]);
 
@@ -46,16 +35,8 @@ export function useRenderCharts(chartID) {
   const { planetList, cuspList } = useMemo(() => {
     if (!data) return { planetList: [], cuspList: [] };
     const generated = generateAllListData(data, chartID === "transit" ? "uT" : "");
-    return {
-      planetList: generated?.planetList || [],
-      cuspList: generated?.cuspList || [],
-    };
+    return { planetList: generated?.planetList || [], cuspList: generated?.cuspList || [],};
   }, [data, chartID]);
 
-  return {
-    aspect,
-    aspectList,
-    planetList,
-    cuspList,
-  };
+  return { aspect, aspectList, planetList, cuspList, };
 }

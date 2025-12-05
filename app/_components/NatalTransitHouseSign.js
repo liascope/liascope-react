@@ -33,34 +33,4 @@ const comparison = generateComparisonTable(natalData, transitData, [unknownTime?
     ])}
   </div>
 </div>
-
-  // Note: Table version kept for semantic correctness & accessibility.Grid version is used instead for cleaner responsive design. 
-  // <div className="rounded-sm sm:rounded-md sm:w-full sm:scale-none scale-[95%] h-fit">
-  //       <table className="w-full text-center border-collapse">
-  //         <thead>
-  //           <tr>
-  //             <th>Planet</th>
-  //             <th className="text-[#4fa091]">Natal</th>
-  //             <th className="text-[#4fa091]">NH</th>
-  //             <th>TH</th>
-  //             <th >Transit</th>
-  //             <th >TH</th>
-  //             <th  className="text-[#4fa091]">NH</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>
-  //           {comparison.map((row, idx) => (
-  //             <tr key={idx}>
-  //               <td className="font-bold">{row.Planet}</td>
-  //               <td>{row.Natal}</td>
-  //               <td>{row.NH}</td>
-  //               <td>{row.TH}</td>
-  //               <td>{row.Transit}</td>
-  //               <td>{row.TH2}</td>
-  //               <td>{row.NH2}</td>
-  //             </tr>
-  //           ))}
-  //         </tbody>
-  //       </table>
-  //     </div>
 }

@@ -1,4 +1,14 @@
-import { aspectSymbols, zodiac } from "./config";
+import { aspectSymbols, zodiac, chartMap } from "./config";
+
+export const getChartType = (pathname) => Object.entries(chartMap).find(([type, paths]) => 
+  paths.includes(pathname))?.[0] || null;
+
+
+export const getSymbolFromAspect = (aspect) => {
+  return (
+    Object.entries(aspectSymbols).find(([key]) => aspect.includes(key))?.[1] || ""
+  );
+};
 
 export const fetchData = async (url, errorMessage) => {
   try {
@@ -6,19 +16,12 @@ export const fetchData = async (url, errorMessage) => {
     if (!response.ok) {
       throw new Error(`Something went wrong, ${response.status}: ${errorMessage}`);
     }
-   
     const data = await response.json();
     return data
   } catch (error) {
     console.error("API Fetch Error: ", error.message);
     throw error;
   }
-};
-
-export const getSymbolFromAspect = (aspect) => {
-  return (
-    Object.entries(aspectSymbols).find(([key]) => aspect.includes(key))?.[1] || ""
-  );
 };
 
 export const findSign = (degree) => {

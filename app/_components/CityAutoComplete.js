@@ -1,26 +1,29 @@
-'use client'
+"use client";
 
 import { useState, useEffect } from "react";
 import { useAutofillPlace } from "../_lib/hooks/useAutofillPlace";
+import { DEBOUNCE } from "../_lib/config";
 
-export default function CityAutoComplete({ initialValue, onSelect, placeholder, label }) {
-  const [typedValue, setTypedValue] = useState(initialValue || "");
-  const [debouncedValue, setDebouncedValue] = useState(typedValue);
+export default function CityAutoComplete({ value, onChange, onSelect, label}) {
+
+  const [inputValue, setInputValue] = useState(value || "");
+  const [debounced, setDebounced] = useState(inputValue);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // UI synced with parent
   useEffect(() => {
-    if (initialValue) setTypedValue(initialValue);
-  }, [initialValue]);
+    setInputValue(value || "");
+  }, [value]);
 
   // debounce
   useEffect(() => {
-    const handler = setTimeout(() => setDebouncedValue(typedValue), 300);
-    return () => clearTimeout(handler);
-  }, [typedValue]);
+    const t = setTimeout(() => setDebounced(inputValue), DEBOUNCE);
+    return () => clearTimeout(t);
+  }, [inputValue]);
 
-  // fetch suggestions using debounced value
-  const { data } = useAutofillPlace("transitPlace", debouncedValue);
-  const suggestions = Array.isArray(data) ? data : [];
+  const { data, isLoading } = useAutofillPlace(`place-${label}`,debounced, showSuggestions);
+
+   const suggestions = Array.isArray(data) ? data : [];
 
   const handleSelect = (item) => {
     const cityName =
@@ -28,43 +31,45 @@ export default function CityAutoComplete({ initialValue, onSelect, placeholder, 
       item.address.town ||
       item.address.village ||
       item.display_name;
-
+  
     const fullLabel = `${cityName}, ${item.address.country}`;
-    setTypedValue(fullLabel);
-    setShowSuggestions(false);
+
+    onChange(fullLabel);
     onSelect({
       city: cityName,
       country: item.address.country,
       lat: item.lat,
       lon: item.lon,
     });
+
+    setShowSuggestions(false);
   };
 
   return (
     <div className="relative">
-      <label htmlFor={label.toLowerCase().replace(/\s+/g, "-")}>{label}</label>
+      <label htmlFor={`place${label}`}>{label}</label>
 
       <input
         type="text"
-        id={label.toLowerCase().replace(/\s+/g, "-")}
-        value={typedValue}
-        placeholder={placeholder}
+        value={inputValue}
+        placeholder={isLoading ? '...' : `City of ${label}`}
         onChange={(e) => {
-          setTypedValue(e.target.value);
+          setInputValue(e.target.value);
           setShowSuggestions(true);
+          onChange(e.target.value);
         }}
-        className="w-full"
         autoComplete="off"
-        required
+        className="w-full"
+        id={`place${label}`}
       />
 
-      {showSuggestions && typedValue && suggestions.length > 0 && (
-        <ul className="absolute bg-white border border-[#ce8063] rounded-md scrollbar-thin scrollbar-thumb-gray-100 w-full max-h-50 overflow-y-auto m-0 p-0 list-none z-40">
+      {showSuggestions && inputValue && suggestions.length > 0 && (
+        <ul className="absolute bg-white border w-full z-40">
           {suggestions.map((item) => (
             <li
               key={item.place_id}
               onClick={() => handleSelect(item)}
-              className="p-[0.5rem] cursor-pointer hover:bg-gray-100"
+              className="p-2 hover:bg-gray-100 cursor-pointer"
             >
               {item.display_name}
             </li>

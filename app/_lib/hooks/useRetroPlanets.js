@@ -1,23 +1,20 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { getChartType } from "../helper";
 
 export default function useRetroPlanets (id, retro) {
   const pathname = usePathname();
 
 useEffect(() => {
   let timeout;
-   const transitRetroPath = ["/charts/transit"].includes(
-        pathname
-      )
- const natalRetroPath = ["/charts/natal", "/charts/draconic","/charts/natal&transit"].includes(
-        pathname
-      )
-       const progRetroPath = ["/charts/progression"].includes(
-        pathname
-      )
 
+const chart = getChartType(pathname)
+const showRetro = chart === "natal" ? retro?.natal
+                : chart === "transit" ? retro?.transit
+                : chart === "progression" ? retro?.progression
+                : null;
+                
 // svg manipulation for highlighting the retro planets:
-const showRetro = natalRetroPath ? retro?.natal : transitRetroPath ? retro?.transit : progRetroPath ? retro?.progression :null
   if (showRetro) {
     timeout = setTimeout(() => {
       const container = document.getElementById(id);

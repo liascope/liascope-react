@@ -22,37 +22,12 @@ export default function AspectTableTransitNatal({ natalData, transitData}) {
 
   return (
     <div className="flex sm:flex-row flex-col sm:w-fit w-full relative">
-      {/* 
-  Note: Table version kept for semantic correctness & accessibility.
-  Grid version is used instead for cleaner responsive design.
-       <div className="overflow-hidden sm:rounded-md sm:w-[40rem] sm:h-[40rem]">
-        <table className="w-full h-full table-fixed border-collapse text-xs sm:text-md">
-          <thead>
-            <tr>
-              <th></th>
-              {planets.map((p) => (
-                <th className="font-bold" key={p}>{symbols.find((s) => s[1] === p)?.[0]}ᵗ</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {aspectMatrix.map((row) => (
-              <tr key={row.planet}>
-                <th className="text-[#4fa091] font-bold">{symbols.find((s) => s[1] === row.planet)?.[0]}</th>
-                {row.aspects.map((symbol, idx) => (
-                  <td className="font-bold" key={idx}>{symbol}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
-<div className="w-full h-full sm:rounded-none sm:w-[39rem] sm:h-[39rem]">
+  <div className="w-full h-full sm:rounded-none sm:w-[39rem] sm:h-[39rem]">
   <div
     className="grid text-[clamp(0.6rem, 1.5vw, 1rem)] sm:text-[clamp(0.8rem, 1vw, 1.2rem)]"
     style={{
       gridTemplateColumns: `repeat(${planets.length + 1}, minmax(0, 1fr))`,
-      gridAutoRows: "1fr" // all same hight
+      gridAutoRows: "1fr" 
     }}
   >
    {/* header */}

@@ -647,10 +647,10 @@ function calHouseTopocentric(LST, Lat, obl){
 }
 
 // Axial Rotation System
-function calHouseAxial(LST, Lat, obl){
+function calHouseAxial(LST, obl){
 	var alpha, cspx, cspy;
 	var cusp = new Array();
-
+    let i, house;
 	for(i = 10;i < 16;i++){
 		house = ((i > 12) ? i - 12 : i);
 		alpha = LST + 60.0 + 30.0 * house;
@@ -670,10 +670,10 @@ function calHouseAxial(LST, Lat, obl){
 }
 
 // Morinus House System
-function calHouseMorinus(LST, Lat, obl){
+function calHouseMorinus(LST, obl){
 	var Z, cspx, cspy;
 	var cusp = new Array()
-
+    let i;
 	for(i = 1;i <= 12;i++){
 		Z = mod360(LST + 60.0 + 30.0 * i);
 		cspx = cos4deg(Z);

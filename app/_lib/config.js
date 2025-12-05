@@ -1,27 +1,32 @@
 export const TIMEZONE_API_BASE_URL= "https://api.timezonedb.com/v2.1/get-time-zone?";
 export const NOMINATIM_URL= "https://nominatim.openstreetmap.org/search?q="
-// format=json&q=";
-export const DEFAULT_HOUSE_SYSTEM= "1"; // 1: Placidus
-export const DEFAULT_TIME = "12:00";
 
+// export const DEFAULT_HOUSE_SYSTEM= "1"; 
+export const DEFAULT_TIME = "00:00";
+export const DEBOUNCE = 1100;
+
+export const chartMap = {
+   natal: ["/charts/natal", "/charts/draconic", "/charts/natal&transit"],
+   transit: "/charts/transit",
+   progression: "/charts/progression",
+};
 export const settings = {CIRCLE_STRONG: 0.2,
   COLOR_BACKGROUND: "#ffffff10",
   COLLISION_RADIUS: 15,
-          POINTS_TEXT_SIZE: 10,
-          MARGIN: 100,
-          COLORS_SIGNS: Array(3).fill(["#ce8063", "#c4a484", "#afc8e7", "#4fa091"]).flat(),
-          DIGNITIES_RULERSHIP: "rs",
-          DIGNITIES_DETRIMENT: "d",
-          DIGNITIES_EXALTATION: "e",
-          DIGNITIES_EXACT_EXALTATION: "E",
-          DIGNITIES_FALL: "f",SIGNS_STROKE: 1,CUSPS_STROKE: 0.6,SYMBOL_AXIS_STROKE: 2,POINTS_STROKE: 1.2,
-POINTS_COLOR : "#000000",    
-SIGNS_COLOR : "#000000",        
-CIRCLE_COLOR : "#333333",       
-LINE_COLOR : "#333333",         
-SYMBOL_AXIS_FONT_COLOR : "#333333", 
-CUSPS_FONT_COLOR : "#000000",
-        };
+  POINTS_TEXT_SIZE: 10,
+  MARGIN: 100,
+  COLORS_SIGNS: Array(3).fill(["#ce8063", "#c4a484", "#afc8e7", "#4fa091"]).flat(),
+  DIGNITIES_RULERSHIP: "rs",
+  DIGNITIES_DETRIMENT: "d",
+  DIGNITIES_EXALTATION: "e",
+  DIGNITIES_EXACT_EXALTATION: "E",
+  DIGNITIES_FALL: "f",SIGNS_STROKE: 1,CUSPS_STROKE: 0.6,SYMBOL_AXIS_STROKE: 2,POINTS_STROKE: 1.2,
+  POINTS_COLOR : "#000000",    
+  SIGNS_COLOR : "#000000",        
+  CIRCLE_COLOR : "#333333",       
+  LINE_COLOR : "#333333",         
+  SYMBOL_AXIS_FONT_COLOR : "#333333", 
+  CUSPS_FONT_COLOR : "#000000"};
 
 export const ASPECTS = [
   { name: "conjunction", angle: 0, orb: 7 },
@@ -32,6 +37,15 @@ export const ASPECTS = [
   { name: "quincunx", angle: 150, orb: 1 },
   { name: "semiSextile", angle: 30, orb: 1 },
 ];
+export const houseSystem = {
+  "1": "Placidus",
+  "2": "Campanus",
+  "3": "Regiomontanus",
+  "4": "Koch",
+  "5": "Topocentric",
+  "6": "Axial Rotation",
+  "7": "Morinus",
+};
 
 export  const symbols = [["☉", "Sun"],["☽", "Moon"],["☿", "Mercury"], ["♀", "Venus"],["♂", "Mars"], ["♃", "Jupiter"], ["♄", "Saturn"], ["♅", "Uranus"],["♆", "Neptune"],["♇", "Pluto"],["☊", "NNode"],["☋", "SNode"],["⚸", "Lilith"],["As", "As"], ["MC", "Mc"],];
 

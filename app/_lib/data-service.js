@@ -4,17 +4,30 @@ import { calHouseCusp2 } from "./calcDegrees";
 import { checkRetrograde } from "./calcDegrees";
 import { TIMEZONE_API_BASE_URL, ASPECTS, zodiac} from "./config";
 import { findSign, fetchData } from "./helper";
-import { NOMINATIM_URL } from "./config";
+// import { NOMINATIM_URL } from "./config";
 
-// for form-comp 
+// CityAutoComplete in Form for lat, lon, city, country 
+// Previously fetched directly against Nominatim, which works in production
+// but leads to CORS and client-side rate-limit issues during local development.
+// Therefore suggestions are now fetched via a Next.js API route that proxies the request server-side.
+// export const fetchSuggestions = async (query) => {
+//   if (!query) return [];
+//   try {
+//     const url = `${NOMINATIM_URL}${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5`;
+//     const data = await fetchData(url, "City, Country, Coords data not found");
+//     return data;
+//   } catch {
+//     throw new Error("Failed to fetch suggestions");
+//   }
+// }; 
 export const fetchSuggestions = async (query) => {
   if (!query) return [];
   try {
-    const url = `${NOMINATIM_URL}${encodeURIComponent(query)}&format=json&addressdetails=1&limit=5`;
-    const data = await fetchData(url, "City, Country, Coords data not found");
+    const data = await fetchData(`/api/nominatim?q=${query}`, "City, Country, Coords data not found");
     return data;
   } catch {
-    throw new Error("Failed to fetch suggestions");
+    return []
+    // throw new Error("Failed to fetch suggestions");
   }
 };
 

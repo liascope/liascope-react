@@ -50,27 +50,5 @@ export default function AspectTable({ aspect }) {
     })}
   </div>
 </div>
-
-    // Note: Table version kept for semantic correctness & accessibility.  Grid version is used instead for cleaner responsive design.
-    //  <table className="table-fixed aspect-table sm:w-full sm:h-[20rem] w-screen h-svw sm:scale-none scale-[90%] border-collapse text-center sm:mt-0 -mt-5">
-    //   <tbody>
-    //     {planetNames.map((planet, i) => {
-    //       const planetAspects = aspect?.filter((a) => a.includes(planet));
-    //       return (
-    //         <tr key={planet}>
-    //           {Array.from({ length: i }).map((_, k) => (
-    //             <td key={k} className="empty"></td>
-    //           ))}
-    //           <th className="text-[#4fa091] font-bold" >{symbols.find((s) => s[1] === planet)?.[0] || planet}</th>
-    //           {planetNames.slice(i + 1).map((p, j) => {
-    //             const asp = planetAspects?.find((a) => a.includes(p));
-    //             const symbol = asp ? getSymbolFromAspect(asp) : "";
-    //             return <td className="font-bold" key={j}>{symbol}</td>;
-    //           })}
-    //         </tr>
-    //       );
-    //     })}
-    //   </tbody>
-    // </table>
   );
 }

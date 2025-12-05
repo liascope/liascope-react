@@ -1,180 +1,126 @@
 'use client';
-
-import Button from "./Button";
-import RoundArrow from "./navicons/RoundArrow";
-import ChartCircle from "./navicons/ChartCircle";
+import FormBtns from "./FormBtns";
 import CityAutoComplete from "./CityAutoComplete";
-import { DEFAULT_HOUSE_SYSTEM, DEFAULT_TIME } from "@/app/_lib/config";
+import { DEFAULT_TIME } from "@/app/_lib/config";
 import { getInitialTransitData } from "@/app/_lib/helper";
+import { fetchTimezone } from "../_lib/data-service";
 
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import { useAstroForm } from "../_lib/context/AstroContext";
 import { useAutofillPlace } from "../_lib/hooks/useAutofillPlace";
 
+const initial = getInitialTransitData(); 
 
-export default function Form() {
-  const router = useRouter();
-  const { formState, setFormState } = useAstroForm();
-  const [autoFillPlace, setAutoFillPlace] = useState(null);
-  const transitAutoFill = useAutofillPlace("transitPlace", autoFillPlace);
+export default function Form() { 
+  const router = useRouter(); 
+  const { formState, setFormState } = useAstroForm(); 
 
-  const [birthPlaceData, setBirthPlaceData] = useState(null);
-  const [transitPlaceData, setTransitPlaceData] = useState(null);
-  const initialTransit = getInitialTransitData()
+  const [birthPlaceLabel, setBirthPlaceLabel] = useState(formState?.birthPlaceData ? `${formState.birthPlaceData.city}, ${formState.birthPlaceData.country}` : "");
+  const [transitPlaceLabel, setTransitPlaceLabel] = useState( formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`  : "");
 
-  const { register, handleSubmit, setValue, } = useForm({
-    defaultValues: {
-      user: formState?.user || "",
-      birthDate: formState?.birthDate || "",
-      birthTime: formState?.birthTime || "",
-      birthPlaceData: formState?.birthPlaceData || null,
-      birthTimeUnknown: formState?.birthTimeUnknown || false,
-      natalHouseSystem: formState?.natalHouseSystem || DEFAULT_HOUSE_SYSTEM,
 
-      moment: formState?.moment || "Now",
-      transitDate: formState?.transitDate || initialTransit.transitDate,
-      transitTime: formState?.transitTime || initialTransit.transitTime,  
-  transitPlaceData: formState?.transitPlaceData || null,
-      transitTimeUnknown: formState?.transitTimeUnknown || false,
-      transitHouseSystem: formState?.transitHouseSystem || DEFAULT_HOUSE_SYSTEM,
-    },
-  });
-
-// CityAutoComplete-Comp Data
-useEffect(() => {
-  if (birthPlaceData && transitPlaceData) {
-    setValue("birthPlaceData", birthPlaceData);
-    setValue("transitPlaceData", transitPlaceData);
-  }
-}, [birthPlaceData, transitPlaceData, setValue]);
-
-useEffect(() => {
-  if (transitAutoFill.data?.[0]) {
-    const p = transitAutoFill.data[0];
-    const place = {
-      city: p.address.city,
-      country: p.address.country,
-      lat: p.lat,
-      lon: p.lon,
-    };
-    setTransitPlaceData(place);
-    setValue("transitPlaceData", place);
-  }
-
-}, [transitAutoFill.data, setValue]);
-
-// todaysTransits 
-function handleTodays() {
-  const initial = getInitialTransitData();
+  const {data} = useAutofillPlace("placeTransit", initial.transitPlace);
+  const { register, handleSubmit, setValue,} = useForm({ defaultValues: {...formState }, });
+    
+  function handleTodaysButton() {
 
   setValue("transitDate", initial.transitDate);
   setValue("transitTime", initial.transitTime);
+  setValue("moment", "Now");
 
-  // trigger API-Request
-  setAutoFillPlace(initial.transitPlace);
-}
-
-  const onSubmit = async (data) => {
-    if (data.birthTimeUnknown) {
-      data.birthTime = DEFAULT_TIME;
-    }
-    if (data.transitTimeUnknown) {
-      data.transitTime = DEFAULT_TIME;
-    }
-    if (birthPlaceData) {
-      data.birthPlaceData = birthPlaceData;
-    }
-    if (transitPlaceData) {
-      data.transitPlaceData = transitPlaceData;
-    }
-    setFormState(data);
-    router.push("/charts/natal");
+  const place = {
+    city: data?.[0]?.address?.city,
+    country: data?.[0]?.address?.country,
+    lat: data?.[0]?.lat,
+    lon: data?.[0]?.lon,
   };
+// console.log(place)
+  setValue("transitPlaceData", place);
+  setTransitPlaceLabel(()=>`${place?.city}, ${place?.country}`);
+ };
+ 
+ const onSubmit = async (data) => { 
+  if (data.birthTimeUnknown) data.birthTime = DEFAULT_TIME;
+  if (data.transitTimeUnknown) data.transitTime = DEFAULT_TIME; 
+  if (!data.birthPlaceData || !data.transitPlaceData){ console.log('birth- and transitplacedata not found')
+     return; }
+  try { 
+     // timezone fetch 
+  const [birthTz, transitTz] = await Promise.all([
+    fetchTimezone(+data.birthPlaceData.lat, +data.birthPlaceData.lon), 
+    fetchTimezone(+data.transitPlaceData.lat, +data.transitPlaceData.lon), ]); //  console.log(birthTz, transitTz);
+    if (!birthTz || !transitTz)  return; 
+    const finalFormData = { ...data, timeZone: { birth: birthTz, transit: transitTz, }, }; setFormState(finalFormData); 
+    router.push("/charts/natal"); } 
+  catch (err) { console.error("Timezone could not be calculated.", err); return; } }; 
 
-  return (<div className="w-full h-fit flex item-center justify-center">
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <fieldset>
-        <div>
-        <legend>Birth Information</legend>
+return (
+<div className="w-full h-fit flex justify-center">
+  <form onSubmit={handleSubmit(onSubmit)}> 
+   <fieldset> 
+    <legend>Birth and Transit Information</legend>
+    <div>
+      <h3 className="text-center mb-2">Natal Information</h3>
+    <label htmlFor="user">Username:</label>
+     <input {...register("user")} id="user" type="text" placeholder="Username" />
+     <label htmlFor="birthDate">Birth Date:</label> 
+     <input {...register("birthDate")} id="birthDate" type="date" required /> 
+     <label htmlFor="birthTime">Birth Time:</label> 
+     <input {...register("birthTime")} id="birthTime" type="time" />
+     <label htmlFor="birthTimeUnknown">
+     <input type="checkbox" {...register("birthTimeUnknown")} id="birthTimeUnknown" className="mr-2" /> Time Unknown </label> 
+                                         
+    <CityAutoComplete 
+    value={birthPlaceLabel} 
+    onChange={(v) => setBirthPlaceLabel(v)} 
+    onSelect={(obj) => {setValue("birthPlaceData", obj); setBirthPlaceLabel(`${obj.city}, ${obj.country}`);}} 
+    label="Birth Place:"/>
 
-        <label htmlFor="user">Username:</label>
-        <input {...register("user")} id="user" type="text" placeholder="Username" />
-
-        <label htmlFor="birthDate">Birth Date:</label>
-        <input {...register("birthDate")} id="birthDate" type="date" required />
-
-        <label htmlFor="birthTime">Birth Time:</label>
-        <input {...register("birthTime")} id="birthTime" type="time" />
-
-        <label htmlFor="birthTimeUnknown">
-          <input type="checkbox" {...register("birthTimeUnknown")} id="birthTimeUnknown" className="mr-2" />
-          Time Unknown
-        </label>
-
-        <CityAutoComplete
-          initialValue={`${formState?.birthPlaceData ? `${formState?.birthPlaceData?.city}, ${formState?.birthPlaceData?.country}` : ""}`}
-          onSelect={setBirthPlaceData}
-          placeholder="City of Birth"
-          label="Birth Place:"
-
-        />
-        <label htmlFor="natalHs">House System:</label>
-        <select {...register("natalHouseSystem")} id="natalHs" >
-          <option value="1">Placidus</option>
-          <option value="2">Campanus</option>
-          <option value="3">Regiomontanus</option>
-          <option value="4">Koch</option>
-          <option value="5">Topocentric</option>
-          <option value="6">Axial Rotation</option>
-          <option value="7">Morinus</option>
-        </select>
-     </div>
-     <div>
-        <legend>Transit Information</legend>
-
-        <label htmlFor="moment">Transit Moment:</label>
-        <input {...register("moment")} id="moment" type="text" placeholder="Transit moment" />
-
-        <label htmlFor="transitDate">Transit Date:</label>
-       <input type="date" {...register("transitDate")}/>
-
-        <label htmlFor="transitTime">Transit Time:</label>
-        <input {...register("transitTime")} id="transitTime" type="time" />
-
-        <label htmlFor="transitTimeUnknown">
-          <input type="checkbox" {...register("transitTimeUnknown")} id="transitTimeUnknown" className="mr-2" />
-          Time Unknown
-        </label>
-
-        <CityAutoComplete
-       initialValue={transitPlaceData ? `${transitPlaceData.city}, ${transitPlaceData.country}` : formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}` : ''}
-       onSelect={setTransitPlaceData} placeholder="City of Transit" label ="Transit Place:"/>
-        
-        <label htmlFor="transitHs">House System:</label>
-        <select  {...register("transitHouseSystem")} id="transitHs">
-          <option value="1">Placidus</option>
-          <option value="2">Campanus</option>
-          <option value="3">Regiomontanus</option>
-          <option value="4">Koch</option>
-          <option value="5">Topocentric</option>
-          <option value="6">Axial Rotation</option>
-          <option value="7">Morinus</option>
-        </select></div>
-      </fieldset>
-      <div className="flex flex-col py-10 sm:py-0 h-full w-fit justify-between">
-        <div className="w-fit flex-col flex justify-between h-fit gap-3">
-        <Button type='savedCharts'></Button>
-     <div className="btnEffect flex flex-row items-center gap-2" onClick={() => handleTodays()}  >
-       <span>Transits Now</span> <RoundArrow/>
-     </div>
-      </div> <button type="submit" className="text-sm sm:text-xl btnEffect "><span className="flex flex-row items-center gap-1"><span>
-          Show Charts </span> <ChartCircle/>
-          </span>
-        </button>
+    <label htmlFor="natalHs">House System:</label> 
+    <select {...register("natalHouseSystem")} id="natalHs" > 
+      <option value="1">Placidus</option> 
+      <option value="2">Campanus</option> 
+      <option value="3">Regiomontanus</option> 
+      <option value="4">Koch</option> 
+      <option value="5">Topocentric</option> 
+      <option value="6">Axial Rotation</option> 
+      <option value="7">Morinus</option> 
+      </select> 
       </div>
-     </form></div>
-  );
-}
+      
+     <div> 
+      <h3 className="text-center mb-2">Transit Information</h3>
+    <label htmlFor="moment">Transit Moment:</label> 
+    <input {...register("moment")} id="moment" type="text" placeholder="Transit moment" /> 
+    <label htmlFor="transitDate">Transit Date:</label> 
+    <input type="date" {...register("transitDate")} id='transitDate'/> 
+    <label htmlFor="transitTime">Transit Time:</label> 
+    <input {...register("transitTime")} id="transitTime" type="time" /> 
+    <label htmlFor="transitTimeUnknown"> 
+    <input type="checkbox" {...register("transitTimeUnknown")} id="transitTimeUnknown" className="mr-2" /> Time Unknown </label> 
+
+    <CityAutoComplete 
+    value={transitPlaceLabel} 
+    onChange={(v) => setTransitPlaceLabel(v)} onSelect={(obj) => setValue("transitPlaceData", obj)} 
+    label="Transit Place:"/>
+                         
+    <label htmlFor="transitHs">House System:</label> 
+    <select {...register("transitHouseSystem")} id="transitHs"> 
+    <option value="1">Placidus</option> 
+    <option value="2">Campanus</option> 
+    <option value="3">Regiomontanus</option> 
+    <option value="4">Koch</option> 
+    <option value="5">Topocentric</option> 
+    <option value="6">Axial Rotation</option> 
+    <option value="7">Morinus</option> 
+     </select> 
+   </div> 
+  </fieldset> 
+
+  <FormBtns onClick={handleTodaysButton}/>
+</form>
+</div> 
+);}

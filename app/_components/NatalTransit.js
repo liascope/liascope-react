@@ -22,7 +22,7 @@ useEffect(()=>{
        const container = document.getElementById(chartID)
         const svg = container.querySelector('svg');
 
-      if (unknownTime?.transit) {
+      if (unknownTime.transit) {
           const el = svg.querySelector(`g#${chartID}-astrology-transit-cusps`);
           if (el) {
             el.classList.add('hidden'); 

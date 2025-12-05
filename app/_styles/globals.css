@@ -91,7 +91,7 @@ label {
 }
 
 legend {
-  @apply font-semibold sm:text-base text-sm
+  @apply font-semibold sm:text-xl text-lg text-center tracking-widest
 }
 th, td {
   @apply border border-black p-2 text-center w-4 h-4 box-border;
