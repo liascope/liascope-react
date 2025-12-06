@@ -12,10 +12,9 @@ import { useRouter } from "next/navigation";
 import { useAstroForm } from "../_lib/context/AstroContext";
 import { useAutofillPlace } from "../_lib/hooks/useAutofillPlace";
 
-const initial = getInitialTransitData(); 
-
 export default function Form() { 
   const router = useRouter(); 
+  const initial = getInitialTransitData(); 
   const { formState, setFormState } = useAstroForm(); 
 
   const [birthPlaceLabel, setBirthPlaceLabel] = useState(formState?.birthPlaceData ? `${formState.birthPlaceData.city}, ${formState.birthPlaceData.country}` : "");
