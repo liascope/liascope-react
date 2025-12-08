@@ -37,29 +37,29 @@ export default function Form() {
     lat: data?.[0]?.lat,
     lon: data?.[0]?.lon,
   };
-// console.log(place)
+  // console.log(place)
   setValue("transitPlaceData", place);
+  // prevent race issue on vercel
   setTimeout(()=>setTransitPlaceLabel(()=>`${place?.city}, ${place?.country}`),100);
  };
- 
-const timeZone = async function (birthLat, birthLon, transitLat, transitLon){
-try { 
-  const [birthTz, transitTz] = await Promise.all([
-    fetchTimezone(birthLat, birthLon), 
-    fetchTimezone(transitLat, transitLon), ]); //  console.log(birthTz, transitTz);
-    if (!birthTz || !transitTz)  return; 
-    const finalFormData = { ...data, timeZone: { birth: birthTz, transit: transitTz, }, }; 
-    setFormState(finalFormData); 
-    router.push("/charts/natal"); } 
-  catch (err) { console.error("Timezone could not be calculated.", err); return; }
-}
+
 
  const onSubmit = async (data) => { 
   if (data.birthTimeUnknown) data.birthTime = DEFAULT_TIME;
   if (data.transitTimeUnknown) data.transitTime = DEFAULT_TIME; 
   if (!data.birthPlaceData || !data.transitPlaceData){ console.log('birth- and transitplacedata not found')
      return; }
-  await timeZone(+data.birthPlaceData.lat, +data.birthPlaceData.lon, +data.transitPlaceData.lat, +data.transitPlaceData.lon)
+
+try { 
+  const [birthTz, transitTz] = await Promise.all([
+    fetchTimezone(+data.birthPlaceData.lat, +data.birthPlaceData.lon), 
+    fetchTimezone( +data.transitPlaceData.lat, +data.transitPlaceData.lon), ]); //  console.log(birthTz, transitTz);
+    if (!birthTz || !transitTz)  return; 
+    const finalFormData = { ...data, timeZone: { birth: birthTz, transit: transitTz, }, }; 
+    setFormState(finalFormData); 
+    router.push("/charts/natal"); } 
+  catch (err) { console.error("Timezone could not be calculated.", err); return; }
+
 }; 
 
 return (

@@ -31,6 +31,7 @@ export const findSign = (degree) => {
 };
 
 export function formatDateTime(date, time) {
+  
   return `${date.split('-').reverse().join('.')} ${time.replace(':', '.')}`;
 }
 
