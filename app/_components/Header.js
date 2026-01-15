@@ -9,13 +9,14 @@ export default function Header(){
 
 return  <header className="bg-white/10 pb-3">
   <div className="w-full sm:h-[15rem] h-[7rem]" >
- <Link href="/"><div className="relative w-full h-full">
+ <Link href="/">
+ <div className="relative w-full h-full">
         <Image
           src="/logo.png"
           alt="Logo"
            fill
-          style={{ objectFit: "contain" }}
-           priority  className="brightness-100 saturate-50"  />
+           priority 
+            className="object-contain brightness-100 saturate-50"/>
        </div>
   </Link> </div>
   <div className="flex flex-row items-center w-full justify-center font-[Dancing_Script] sm:text-6xl text-4xl text-center font-light tracking-widest text-[rgba(230,193,85,0.8)]">
