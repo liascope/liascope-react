@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 export default function Footer() {
   return (
     <footer className="my-10 overflow-hidden text-center w-full text-xs sm:text-sm tracking-widest drop-shadow-xl text-stone-500/70">
