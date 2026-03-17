@@ -11,6 +11,7 @@ import useTimeunknown from '@/app/_lib/hooks/useTimeunknown';
 import useRetroPlanets from '@/app/_lib/hooks/useRetroPlanets';
 import AspectFilter from './AspectFilter';
 import { useState } from 'react';
+import { capitalize } from '../_lib/config';
 
 export default function Charts({ chartID }) {
   const { unknownTime, retro} = useAstroForm();
@@ -23,6 +24,8 @@ export default function Charts({ chartID }) {
   useRetroPlanets(chartID, retro)
 
 const copyChart = [
+  `${capitalize(chartID)}-Chart:`, 
+  "",
  "Signs:", ...cuspList.map(c => `${c.house}: ${c.sign}`), 
   "",
  "Planets:", ...planetList.map(p => `House ${p.house}: ${p.planet}`),
