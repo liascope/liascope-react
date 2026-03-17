@@ -4,7 +4,7 @@ import { useAstroForm } from "../_lib/context/AstroContext";
 import Loader from "./Loader";
 import Button from "./Button";
 
-export default function ChartsWrapper({ children }) {
+export default function ChartsWrapper({ children}) {
   const { natalData } = useAstroForm();
 
   if (!natalData) {
