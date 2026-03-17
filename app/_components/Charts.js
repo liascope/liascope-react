@@ -10,27 +10,16 @@ import { useAstroForm } from '../_lib/context/AstroContext';
 import useTimeunknown from '@/app/_lib/hooks/useTimeunknown';
 import useRetroPlanets from '@/app/_lib/hooks/useRetroPlanets';
 import AspectFilter from './AspectFilter';
-import { useState } from 'react';
-import { capitalize } from '../_lib/config';
+import CopyChart from './CopyChart';
 
 export default function Charts({ chartID }) {
   const { unknownTime, retro} = useAstroForm();
-  const [copied, setCopied] = useState(false)
-
+ 
  // Chart & Aspect Table & Aspect List, House and Planet Positions Lists
   const { aspect, aspectList, planetList, cuspList } = useRenderCharts(chartID);
 
   useTimeunknown(chartID, unknownTime)
   useRetroPlanets(chartID, retro)
-
-const copyChart = [
-  `${capitalize(chartID)}-Chart:`, 
-  "",
- "Signs:", ...cuspList.map(c => `${c.house}: ${c.sign}`), 
-  "",
- "Planets:", ...planetList.map(p => `House ${p.house}: ${p.planet}`),
-  "",
-  "Aspects:", ...aspect, "",].join("\n");
 
   return (
     <motion.div
@@ -42,10 +31,7 @@ const copyChart = [
     >
       <div className="sm:w-[35%] w-fit h-fit flex flex-col">
 
-        <div className='relative z-10 w-full text-right pr-7 text-xs'>
-           <span className={`absolute right-10 -top-9 bg-stone-500 text-white p-1 rounded transition-all duration-300 ${copied ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>Chart copied!</span>
-          <span title='Copy for AI use' onClick={() => {setCopied(true); navigator.clipboard.writeText(copyChart);setTimeout(()=>setCopied(false), 3000)}} className='border-2 text-stone-500 cursor-pointer p-1 rounded hover:border-dotted hover:border-stone-400'>Copy Chart</span>
-          </div>
+      <CopyChart chart={chartID} signs={cuspList} planets={planetList} aspects={aspect}/>
 
         <div className="w-screen sm:w-full flex flex-col gap-5">
         <HouseSignList data={{ planetList, cuspList }} />
