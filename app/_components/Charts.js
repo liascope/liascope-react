@@ -31,7 +31,7 @@ export default function Charts({ chartID }) {
     >
       <div className="sm:w-[35%] w-fit h-fit flex flex-col">
 
-      <CopyChart chart={chartID} signs={cuspList} planets={planetList} aspects={aspect}/>
+      <CopyChart chart={chartID} signs={cuspList} planets={planetList} aspects={aspect} retro={retro} time={unknownTime}/>
 
         <div className="w-screen sm:w-full flex flex-col gap-5">
         <HouseSignList data={{ planetList, cuspList }} />
