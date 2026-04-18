@@ -10,8 +10,8 @@ export const RETRY_COUNT = 3;
 export const capitalize = s => s[0].toUpperCase() + s.slice(1);
 
 export const chartMap = {
-   natal: ["/charts/natal", "/charts/draconic", "/charts/natal&transit"],
-   transit: "/charts/transit",
+   natal: ["/charts/natal", "/charts/draconic", "/charts/comparison"],
+   transit: "/charts/external",
    progression: "/charts/progression",
 };
 export const settings = {CIRCLE_STRONG: 0.2,

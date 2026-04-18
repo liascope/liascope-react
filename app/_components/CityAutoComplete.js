@@ -59,6 +59,7 @@ export default function CityAutoComplete({ value, onChange, onSelect, label}) {
           onChange(e.target.value);
         }}
         autoComplete="off"
+        required
         className="w-full"
         id={`place${label}`}
       />

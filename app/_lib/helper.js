@@ -3,6 +3,16 @@ import { aspectSymbols, zodiac, chartMap, RETRY_DELAY, RETRY_COUNT } from "./con
 export const getChartType = (pathname) => Object.entries(chartMap).find(([type, paths]) => 
   paths.includes(pathname))?.[0] || null;
 
+export const validateDate = (value) => {
+  const date = new Date(value);
+  const year = date.getFullYear();
+  const now = new Date().getFullYear();
+
+  if (isNaN(date.getTime())) return "Invalid date";
+  if (year < 1700 || year > now) return "Invalid year";
+
+  return true;
+};
 
 export const getSymbolFromAspect = (aspect) => {
   return (

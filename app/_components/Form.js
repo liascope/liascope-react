@@ -2,7 +2,7 @@
 import FormBtns from "./FormBtns";
 import CityAutoComplete from "./CityAutoComplete";
 import { DEFAULT_TIME } from "@/app/_lib/config";
-import { getInitialTransitData } from "@/app/_lib/helper";
+import { getInitialTransitData, validateDate } from "@/app/_lib/helper";
 import { fetchTimezone } from "../_lib/data-service";
 
 import { useState} from "react";
@@ -20,7 +20,7 @@ export default function Form() {
   const [transitPlaceLabel, setTransitPlaceLabel] = useState( formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`  : "");
  
   const {data} = useAutofillPlace("placeTransit", initial.transitPlace);
-  const { register, handleSubmit, setValue, watch} = useForm({ defaultValues: {...formState, type: formState?.type || 'birth'}, });
+  const { register, handleSubmit, setValue, watch, formState: { errors }} = useForm({ defaultValues: {...formState, type: formState?.type || 'birth'}, });
 
     const selected = watch("type") 
     const selectedType = selected === 'birth' ? 'Transit' : 'Partner'
@@ -48,11 +48,20 @@ export default function Form() {
   setValue("transitDate", '');
   setValue("transitTime", '');
   setValue("moment", "");
+  setValue('transitPlaceData', '')
   setTransitPlaceLabel('')
+  setValue('transitTimeUnknown', false) 
   // console.log(selected)
  }
 
  const onSubmit = async (data) => { 
+
+  if (
+    (!data.birthTime && !data.birthTimeUnknown) ||
+    (!data.transitTime && !data.transitTimeUnknown)
+  ) {
+    return;
+  }
   if (data.birthTimeUnknown) data.birthTime = DEFAULT_TIME;
   if (data.transitTimeUnknown) data.transitTime = DEFAULT_TIME; 
   if (!data.birthPlaceData || !data.transitPlaceData){ console.log('birth- and transitplacedata not found')
@@ -84,9 +93,9 @@ return (
     <div>
       <h3 className="text-center mb-2">Natal Information</h3>
     <label htmlFor="user">Username:</label>
-     <input {...register("user")} id="user" type="text" placeholder="Username" />
+     <input {...register("user")} id="user" type="text" placeholder="Username" required />
      <label htmlFor="birthDate">Birth Date:</label> 
-     <input {...register("birthDate")} id="birthDate" type="date" required /> 
+     <input {...register("birthDate", { validate: validateDate})} id="birthDate" type="date" required /> 
      <label htmlFor="birthTime">Birth Time:</label> 
      <input {...register("birthTime")} id="birthTime" type="time" />
      <label htmlFor="birthTimeUnknown">
@@ -108,14 +117,19 @@ return (
       <option value="6">Axial Rotation</option> 
       <option value="7">Morinus</option> 
       </select> 
+      {errors.birthDate && (
+  <p className="text-red-500 text-sm">
+    {errors.birthDate.message}
+  </p>
+)}
       </div>
       
      <div> 
       <h3 className="text-center mb-2">{selectedType} Information</h3>
     <label htmlFor="moment">{selectedType === 'Partner' ? selectedType : 'Transit Moment:'}</label> 
-    <input {...register("moment")} id="moment" type="text" placeholder={`${selectedType === 'Partner' ? 'Partner name' : 'transit moment'}`} /> 
+    <input {...register("moment")} id="moment" type="text" placeholder={`${selectedType === 'Partner' ? 'Partner name' : 'transit moment'}`} required/> 
     <label htmlFor="transitDate">{selectedType === 'Partner' ? 'Birth Date' : 'Transit Date:'}</label> 
-    <input type="date" {...register("transitDate")} id='transitDate'/> 
+    <input type="date" {...register("transitDate", {validate: validateDate })} id='transitDate' required/> 
     <label htmlFor="transitTime">{selectedType === 'Partner' ? 'Birth Time' : 'Transit Time:'}</label> 
     <input {...register("transitTime")} id="transitTime" type="time" /> 
     <label htmlFor="transitTimeUnknown"> 
@@ -135,7 +149,12 @@ return (
     <option value="5">Topocentric</option> 
     <option value="6">Axial Rotation</option> 
     <option value="7">Morinus</option> 
-     </select> 
+     </select>
+      {errors.transitDate && (
+  <p className="text-red-500 text-sm">
+    {errors.transitDate.message}
+  </p>
+)}
    </div> 
   </fieldset> 
 
