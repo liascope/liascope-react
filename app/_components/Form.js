@@ -16,20 +16,21 @@ export default function Form() {
   const router = useRouter(); 
   const initial = getInitialTransitData(); 
   const { formState, setFormState } = useAstroForm(); 
-
   const [birthPlaceLabel, setBirthPlaceLabel] = useState(formState?.birthPlaceData ? `${formState.birthPlaceData.city}, ${formState.birthPlaceData.country}` : "");
   const [transitPlaceLabel, setTransitPlaceLabel] = useState( formState?.transitPlaceData ? `${formState.transitPlaceData.city}, ${formState.transitPlaceData.country}`  : "");
-
-
+ 
   const {data} = useAutofillPlace("placeTransit", initial.transitPlace);
-  const { register, handleSubmit, setValue,} = useForm({ defaultValues: {...formState }, });
-    
-  function handleTodaysButton() {
+  const { register, handleSubmit, setValue, watch} = useForm({ defaultValues: {...formState, type: formState?.type || 'birth'}, });
 
+    const selected = watch("type") 
+    const selectedType = selected === 'birth' ? 'Transit' : 'Partner'
+
+  function handleTodaysButton() {
   setValue("transitDate", initial.transitDate);
   setValue("transitTime", initial.transitTime);
   setValue("moment", "Now");
-  
+  setValue('type', 'birth')
+
  if (!data || data.length === 0) return;
   const place = {
     city: data?.[0]?.address?.city || '',
@@ -43,6 +44,13 @@ export default function Form() {
   setTimeout(()=>setTransitPlaceLabel(()=>`${place?.city}, ${place?.country}`),100);
  };
 
+ function handleType () {
+  setValue("transitDate", '');
+  setValue("transitTime", '');
+  setValue("moment", "");
+  setTransitPlaceLabel('')
+  // console.log(selected)
+ }
 
  const onSubmit = async (data) => { 
   if (data.birthTimeUnknown) data.birthTime = DEFAULT_TIME;
@@ -57,7 +65,7 @@ try {
     if (!birthTz || !transitTz)  return; 
     const finalFormData = { ...data, timeZone: { birth: birthTz, transit: transitTz, }, }; 
     setFormState(finalFormData); 
-    router.push("/charts/natal"); } 
+     router.push(`/charts/${selected === 'birth' ? 'natal' : 'comparison'}`); }
   catch (err) { console.error("Timezone could not be calculated.", err); return; }
 
 }; 
@@ -66,7 +74,13 @@ return (
 <div className="w-full h-fit flex justify-center">
   <form onSubmit={handleSubmit(onSubmit)}> 
    <fieldset> 
-    <legend>Birth and Transit Information</legend>
+    
+ <legend className="flex flex-col items-start w-full p-1"> 
+  <h2 className="text-center">Information</h2>
+  <label> <input type="radio" value="birth" {...register("type")} className={`transition-all duration-100 ${selected === 'birth' ? 'mr-8' : 'mr-2'}`} onClick={handleType}/> Birth and Transit </label>
+  <label> <input type="radio" value="synastry"  {...register("type")} className={`transition-all duration-100 ${selected === 'synastry' ? 'mr-8' : 'mr-2'}`} onClick={handleType} /> Synastry</label>
+</legend>
+
     <div>
       <h3 className="text-center mb-2">Natal Information</h3>
     <label htmlFor="user">Username:</label>
@@ -97,27 +111,27 @@ return (
       </div>
       
      <div> 
-      <h3 className="text-center mb-2">Transit Information</h3>
-    <label htmlFor="moment">Transit Moment:</label> 
-    <input {...register("moment")} id="moment" type="text" placeholder="Transit moment" /> 
-    <label htmlFor="transitDate">Transit Date:</label> 
+      <h3 className="text-center mb-2">{selectedType} Information</h3>
+    <label htmlFor="moment">{selectedType === 'Partner' ? selectedType : 'Transit Moment:'}</label> 
+    <input {...register("moment")} id="moment" type="text" placeholder={`${selectedType === 'Partner' ? 'Partner name' : 'transit moment'}`} /> 
+    <label htmlFor="transitDate">{selectedType === 'Partner' ? 'Birth Date' : 'Transit Date:'}</label> 
     <input type="date" {...register("transitDate")} id='transitDate'/> 
-    <label htmlFor="transitTime">Transit Time:</label> 
+    <label htmlFor="transitTime">{selectedType === 'Partner' ? 'Birth Time' : 'Transit Time:'}</label> 
     <input {...register("transitTime")} id="transitTime" type="time" /> 
     <label htmlFor="transitTimeUnknown"> 
     <input type="checkbox" {...register("transitTimeUnknown")} id="transitTimeUnknown" className="mr-2" /> Time Unknown </label> 
 
     <CityAutoComplete 
     value={transitPlaceLabel} 
-    onChange={(v) => setTransitPlaceLabel(v)} onSelect={(obj) => setValue("transitPlaceData", obj)} 
-    label="Transit Place:"/>
+    onChange={(v) =>setTransitPlaceLabel(v)} onSelect={(obj) => setValue("transitPlaceData", obj)} 
+    label={`${selectedType === 'Partner' ? 'Birth' : selectedType} Place:`}/>
                          
     <label htmlFor="transitHs">House System:</label> 
     <select {...register("transitHouseSystem")} id="transitHs"> 
     <option value="1">Placidus</option> 
     <option value="2">Campanus</option> 
     <option value="3">Regiomontanus</option> 
-    <option value="4">Koch</option> 
+    <option value="4">Koch</option>  
     <option value="5">Topocentric</option> 
     <option value="6">Axial Rotation</option> 
     <option value="7">Morinus</option> 
@@ -125,7 +139,7 @@ return (
    </div> 
   </fieldset> 
 
-  <FormBtns onClick={handleTodaysButton}/>
+<FormBtns onClick={handleTodaysButton} type={selected}/>
 </form>
 </div> 
 );}

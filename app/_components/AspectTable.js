@@ -4,7 +4,7 @@ import { getSymbolFromAspect } from "@/app/_lib/helper";
 export default function AspectTable({ aspect }) {
   const planetNames = symbols.map((s) => s[1]);
 
-  return ( <div className="w-screen sm:w-full sm:ml-5 p-1">
+  return ( <div className="w-screen sm:w-full pr-7 md:pr-0 md:scale-90">
   <div
     className="grid text-center text-sm sm:text-base"
     style={{

@@ -26,7 +26,7 @@ export default function Button({ type, children }) {
   if (type === "savedCharts" || type === "openForm") {
     const href = type === "savedCharts" ? "/profiles" : "/form";
     const className =
-      "text-[#e89b53] text-base cursor-pointer transition-colors sm:text-xl duration-300 hover:text-[#4fa091]";
+      "text-[#e89b53] sm:text-sm cursor-pointer transition-colors md:text-base lg:text-xl duration-300 hover:text-[#4fa091] z-10";
 
     const defaultContent =
       type === "savedCharts" ? (

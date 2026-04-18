@@ -1,4 +1,4 @@
-import { aspectSymbols, zodiac, chartMap } from "./config";
+import { aspectSymbols, zodiac, chartMap, RETRY_DELAY, RETRY_COUNT } from "./config";
 
 export const getChartType = (pathname) => Object.entries(chartMap).find(([type, paths]) => 
   paths.includes(pathname))?.[0] || null;
@@ -10,16 +10,26 @@ export const getSymbolFromAspect = (aspect) => {
   );
 };
 
-export const fetchData = async (url, errorMessage) => {
+//for throttling
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+export const fetchData = async (url, errorMessage, retries = RETRY_COUNT, wait = RETRY_DELAY) => {
   try {
     const response = await fetch(url);
+
     if (!response.ok) {
+      if (retries > 0) {
+        await delay(wait);
+        return fetchData(url, errorMessage, retries - 1, wait * 2); 
+      }
       throw new Error(`Something went wrong, ${response.status}: ${errorMessage}`);
     }
+
     const data = await response.json();
-    return data
+    return data;
+
   } catch (error) {
-    console.error("API Fetch Error: ", error.message);
+    console.error("API Fetch Error:", error.message);
     throw error;
   }
 };

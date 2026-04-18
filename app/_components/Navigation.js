@@ -6,12 +6,12 @@ import { useAstroForm } from "../_lib/context/AstroContext"
 
 export default function Navigation() {
   const pathname = usePathname()
-const {unknownTime}=useAstroForm()
+const {unknownTime, selected}=useAstroForm()
 
   const links = [
     { href: "/charts/natal", label: "Natal" },
-    { href: "/charts/natal&transit", label: "Natal & Transit" },
-    { href: "/charts/transit", label: "Transit" },
+    { href: "/charts/external", label: `${selected === 'birth' ? 'Transit' : 'Partner Natal' }`},
+    { href: "/charts/comparison", label: `${selected === 'birth' ? 'Natal & Transit' : 'Synastry'}` },
     { href: "/charts/progression", label: "Progression" },
     { href: "/charts/draconic", label: "Draconic" },
  ...(unknownTime?.birth ? [] : [{ href: "/charts/perfection", label: "ann. Perfection" }]),

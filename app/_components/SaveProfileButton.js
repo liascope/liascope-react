@@ -10,7 +10,7 @@ export default function SaveProfileButton() {
 
   function handleSave() {
     if (!formState) return;
-    const newProfileId = `${formState.user}-${formState.birthDate}-${formState.birthTime}`;
+    const newProfileId = `${formState.user}-${formState.birthDate}-${formState.birthTime}-${formState.type}`;
     const newProfile = {
       id: newProfileId,
       formState,
@@ -42,6 +42,8 @@ export default function SaveProfileButton() {
     existing.push(newProfile);
     localStorage.setItem('liascope-profiles', JSON.stringify(existing));
     setStatus("saved");
+
+    console.log(newProfileId)
   }
 
   return (

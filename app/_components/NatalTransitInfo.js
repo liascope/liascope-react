@@ -8,7 +8,7 @@ import Edit from "./navicons/Edit";
 import { houseSystem } from "../_lib/config";
 
 export default function NatalTransitInfo() {
- const {formState, chartData} = useAstroForm()
+ const {formState, chartData, selected} = useAstroForm()
 
  if (!formState) {return ( <Loader size='w-[6rem]'></Loader> );}
 
@@ -21,7 +21,7 @@ return (
 
 <div className="h-fit p-4 border-gray-300 border-b  ">
 <div className="w-full h-fit  flex flex-row justify-between">
-  <h2 className=" font-bold mb-4 text-[#e89b53] tracking-wider font-[Dancing_Script] text-xl sm:text-2xl">Natal Dates for {formState?.user || "..."}</h2>
+  <h2 className=" font-bold mb-4 text-[#4fa091] tracking-wider font-[Dancing_Script] text-xl sm:text-2xl">Natal Dates for {formState?.user || "..."}</h2>
   <SaveProfileButton/>
   </div>
   <div className="text-xs sm:text-sm space-y-3">
@@ -46,21 +46,21 @@ return (
 </div>
 
 <div className=" h-fit sm:p-4 p-1">
- <h2 className="text-xl sm:text-2xl tracking-wider font-bold mb-4 text-[#e89b53] font-[Dancing_Script]">Transit Dates for {formState?.moment || "..."}</h2>
+ <h2 className="text-xl sm:text-2xl tracking-wider font-bold mb-4 text-[#3f638d] font-[Dancing_Script]">{selected === 'birth' ? 'Transit' : 'Natal'} Dates for {formState?.moment || "..."}</h2>
   <div className="text-xs sm:text-sm space-y-3">
    <div className="flex justify-between  ">
-      <span className="font-medium ">Transit Date</span>
+      <span className="font-medium ">{selected === 'birth' ? 'Transit' : 'Birth'} Date</span>
       <span>{formatDate(formState?.transitDate) || "..."}</span>
     </div>
     <div className="flex justify-between  ">
-      <span className="font-medium ">Transit Time</span>
+      <span className="font-medium ">{selected === 'birth' ? 'Transit' : 'Birth'} Time</span>
       <div className="flex flex-col">
       <span className=" text-end">{formState?.transitTimeUnknown ? '-- : --' : `${formState?.transitTime || "..."} ${chartData?.transitData?.localTime || '' }` }</span>
       <p className=" scale-[80%] text-end"> {formState?.transitTimeUnknown ? "" : chartData?.transitData?.utcTime || ''}</p> 
        </div>
     </div>
     <div className="flex justify-between">
-     <span className="font-medium">Transit Place</span>
+     <span className="font-medium">{selected === 'birth' ? 'Transit' : 'Birth'} Place</span>
      <span>{formState?.transitPlaceData?.city.split(',')[0] || "..."}, {formState?.transitPlaceData?.country.split(',')[0] || "..."}</span>
     </div>
   </div>

@@ -8,11 +8,20 @@ Multi-chart generation
   Generate and view six distinct charts:
 
   * Natal
-  * Transit
-  * Natal + Transit
+  * Transit or Partner Natal
+  * Natal & Transit or Synastry
   * Draconic
   * Progression
   * Annual Perfection
+
+Comparison mode selection  
+Flexible form-based selection between:
+
+* Natal & Transit comparison
+* Synastry chart mode
+
+Copy chart feature  
+* Copy structured chart data for external use (e.g. AI analysis or sharing)
 
 Save & Load
 

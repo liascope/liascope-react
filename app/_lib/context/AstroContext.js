@@ -43,6 +43,7 @@ const chartData = useMemo(() => {if (!natalData || !transitData || !progressionD
 
 const contextValue = useMemo(() => ({
   formState,
+  selected: formState?.type,
   setFormState,
   unknownTime,
   chartData,

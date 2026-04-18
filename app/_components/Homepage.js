@@ -9,18 +9,19 @@ import Sun from "./navicons/Sun";
   ["Draconic Chart", "Progressed Chart"],
   ["Perfection Chart", "Aspects & Configurations"],
 ];
-  return  <main className="sm:px-0 px-7">  <h2 className="text-[#e89b53] sm:text-xl text-md text-center sm:py-8 sm:mb-14 sm:-mt-4"> A quick & precise way to get an insight of the most important astrological charts of your scope.
-      </h2> <div className="sm:flex hidden items-center justify-center top-0 tracking-wider relative min-h-screen w-full pb-72">  
+  return  <main className="px-7 md:p-0">  <h2 className="text-[#e89b53] lg:text-xl text-md text-center md:mb-18 md:mt-5"> A quick & precise way to get an insight of the most important astrological charts of your scope.
+      </h2> 
+      
+      <div className="md:flex hidden items-center justify-center top-0 tracking-wider relative min-h-screen min-w-screen pb-72 ">  
       <Button type="openForm"><div className="btnEffect flex flex-row items-center">Your<Sun/>Scope</div> </Button>
+
         {items.map((item, i) => {
           const angle = (360 / items.length) * i;
           return (
             <div
               key={i}
-              className="absolute transform sm:w-100 lg:w-120 text-center lg:p-28"
-              style={{
-                transform:`rotate(${angle}deg) translate(300px) rotate(-${angle}deg)`, // Arrange items in circular orbit with rotation
-              }}
+              className="absolute text-center md:w-60 lg:w-72 circle-wrapper"
+              style={{transform: `rotate(${angle}deg) translate(var(--radius)) rotate(-${angle}deg)`,}}
             >
               <h3 className="text-[#607f6a]">{item.title}</h3>
               <p className="text-sm leading-relaxed">{item.description}</p>
@@ -28,13 +29,14 @@ import Sun from "./navicons/Sun";
           );
         }
         )}</div>
+
           {/* small screen: */}
-       <div className="flex sm:hidden flex-col items-center mt-6 min-h-screen w-full sm:text-sm text-xs gap-6">
+       <div className="flex md:hidden flex-col items-center mt-6 min-h-screen w-full sm:text-sm text-xs gap-6">
  <div className="grid grid-rows-3 gap-4 w-full">
       {orderedGroups.map((group, rowIndex) => (
         <div
           key={rowIndex}
-          className="grid grid-cols-2 gap-4 sm:text-center"
+          className="grid grid-cols-2 gap-4 md:text-center"
         >
           {group.map((title) => {
             const item = items.find((i) => i.title === title);

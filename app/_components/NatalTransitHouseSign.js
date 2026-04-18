@@ -1,7 +1,7 @@
 import { generateComparisonTable } from "@/app/_lib/data-service";
 import { useAstroForm } from "../_lib/context/AstroContext";
 export default function NatalTransitHouseSign ({natalData, transitData}) {
-const {unknownTime} = useAstroForm()
+const {unknownTime, selected} = useAstroForm()
 
 const comparison = generateComparisonTable(natalData, transitData, [unknownTime?.birth, unknownTime?.transit]);
 
@@ -16,9 +16,9 @@ const comparison = generateComparisonTable(natalData, transitData, [unknownTime?
     <div className="font-bold pb-1 gridContainer">Planet</div>
     <div className="font-bold text-[#4fa091] gridContainer ">Natal</div>
     <div className="font-bold text-[#4fa091] gridContainer ">NH</div>
-    <div className="gridContainer font-bold ">TH</div>
-    <div className="gridContainer font-bold  ">Transit</div>
-    <div className="gridContainer font-bold  ">TH</div>
+    <div className="gridContainer font-bold text-[#3f638d]">{selected === 'birth' ? 'TH' : 'PH'}</div>
+    <div className="gridContainer font-bold text-[#3f638d] ">{selected === 'birth' ? 'Transit' : 'Partner'}</div>
+    <div className="gridContainer font-bold text-[#3f638d] ">{selected === 'birth' ? 'TH' : 'PH'}</div>
     <div className="font-bold text-[#4fa091] border-b border-gray-300">NH</div>
 
     {/* Rows */}

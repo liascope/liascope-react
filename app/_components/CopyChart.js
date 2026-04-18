@@ -9,7 +9,8 @@ const [copied, setCopied] = useState(false)
 const timeUnknown = (["natal", "draconic", "progression"].includes(chart) && time.birth) || (chart === "transit" && time.transit);
 const copyChart = [`${capitalize(chart)}-Chart:`, "",
   ...(timeUnknown ? ["Unknown time, house placements unavailable.", ""] : ["Signs:", ...signs.map(c => `${c.house}: ${c.sign}`), ""]),
- "Planets:", ...planets.map(p => `${p.planet} ${retro[chart]?.includes(p.planet) ? "Retrograde" : ""} ${Object.keys(zodiac).find(s => zodiac[s] === p.symbol)} ${!timeUnknown ? `in House ${p.house}` : ''}`),"",
+ "Planets:", ...planets.map(p => {const house = p.planet === "As" ? 1 : p.planet === "Mc" ? 10 : p.house;
+  return `${p.planet} ${retro[chart]?.includes(p.planet) ? "Retrograde" : ""} ${Object.keys(zodiac).find(s => zodiac[s] === p.symbol)} ${!timeUnknown ? `in House ${house}` : ""}`;}),"",
   "Aspects:", ...aspects,"",].join("\n");
 
 return (<div className='relative z-10 w-full text-right pr-7 text-xs'>

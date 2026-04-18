@@ -7,8 +7,8 @@ import InfoTable from "../_components/InfoTable";
 
 export default function ChartsLayout({ children }) {
   return (
-  <div className="overflow-x-hidden flex flex-col-reverse sm:flex sm:flex-row relative w-screen sm:p-10">
-      <div className="sm:flex-1 transition-all duration-500 ease-in-out relative pb-40">
+  <div className="overflow-x-hidden flex flex-col-reverse min-[125px]:flex min-[1625px]:flex-row relative w-screen">
+      <div className="md:flex-1 transition-all duration-500 ease-in-out relative pb-40">
   
         <ToggleAspectListBtn
             buttonLabel="Info"    
@@ -20,7 +20,7 @@ export default function ChartsLayout({ children }) {
           </ToggleAspectListBtn>
         <ChartsWrapper>{children}</ChartsWrapper>
       </div>
-      <div className="w-full sm:w-[20%] z-10 flex flex-col">
+      <div className="w-full min-[1625px]:w-[20%] max-[1625px]:flex-row max-[700px]:flex-col z-10 flex flex-col">
         <NatalTransitInfo />
         <Navigation />
       </div>

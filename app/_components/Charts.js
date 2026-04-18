@@ -23,17 +23,17 @@ export default function Charts({ chartID }) {
 
   return (
     <motion.div
-      className="flex sm:flex-row flex-col-reverse w-screen sm:w-full justify-between"
+      className="flex flex-row max-[1000px]:flex-col-reverse w-screen md:w-full justify-between"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -7 }}
       transition={{ duration: 0.4 }}
     >
-      <div className="sm:w-[35%] w-fit h-fit flex flex-col">
+      <div className="min-[1000px]:w-[40%] min-w-0 h-fit flex flex-col">
 
       <CopyChart chart={chartID} signs={cuspList} planets={planetList} aspects={aspect} retro={retro} time={unknownTime}/>
 
-        <div className="w-screen sm:w-full flex flex-col gap-5">
+        <div className="w-screen min-[1000px]:w-full flex flex-col gap-5 ">
         <HouseSignList data={{ planetList, cuspList }} />
         <AspectTable aspect={aspect} />
        </div>
@@ -47,8 +47,12 @@ export default function Charts({ chartID }) {
         </ToggleAspectListBtn>
         
       </div>
-    <div className='relative'><div className='absolute sm:top-0 top-6 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
-      <div className='sm:block flex items-center justify-center h-svw sm:h-fit' id={chartID}/> </div>
+    <div className='relative min-[1000px]:w-[60%] min-w-0'>
+    
+    <div className='absolute sm:top-0 top-6 left-2 z-25'><AspectFilter chartID={chartID}></AspectFilter></div>
+
+      <div className='flex items-center justify-center max-[1000px]:h-svw' id={chartID}/>
+       </div>
     </motion.div>
   );
 }

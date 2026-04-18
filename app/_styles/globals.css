@@ -46,22 +46,22 @@ input:hover {
   border-color: #e89b53;
 }
  fieldset {
-  @apply flex flex-col sm:py-9 sm:flex-row justify-center h-fit gap-10 p-3 sm:p-6 text-gray-500}
+  @apply flex flex-col md:py-9 md:flex-row justify-center h-fit gap-10 p-3 sm:p-6 text-gray-500}
 
 form {
-  @apply flex w-fit h-auto relative sm:flex-row sm:gap-10 gap-3 items-center justify-center sm:bg-white/30 backdrop-blur-md p-3 sm:p-6 rounded-xl shadow-lg mb-40}
+  @apply flex w-fit h-auto relative sm:flex-row sm:gap-10 gap-3 items-center justify-center md:backdrop-blur-md p-3 sm:p-1 md:p-6 rounded-xl md:shadow-lg mb-40 sm:shadow-none sm:backdrop-blur-none}
 
 
 .btnEffect {
-   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors text-sm sm:text-xl duration-300 hover:bg-[#e89b53] w-fit sm:px-5 py-2 px-2 
+   @apply active:scale-97 bg-[#ebc155cc] text-white border-none rounded-sm sm:rounded-md cursor-pointer transition-colors sm:text-base md:text-lg lg:text-xl duration-300 hover:bg-[#e89b53] sm:w-36 md:w-40 lg:w-fit flex items-center justify-center p-2
 }
 .gridContainer {
   @apply border-e border-b flex items-center justify-center border-gray-300
 }
-label {
-  @apply sm:text-base text-sm
-}
 
+option, select, label {
+  @apply md:text-sm text-base
+}
 /* SVG Data Attributes */
 [data-name="square"],
 [data-name="opposition"] {
@@ -107,4 +107,15 @@ td.empty {
 .no-border-table td,
 .no-border-table th {
   @apply border-0 p-2 text-center w-4 h-4 box-border;
+}
+
+.circle-wrapper {
+  --radius: 250px;
+}
+
+
+@media (min-width: 1024px) {
+  .circle-wrapper {
+    --radius: 280px;
+  }
 }
