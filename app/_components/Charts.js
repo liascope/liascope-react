@@ -11,12 +11,23 @@ import useTimeunknown from '@/app/_lib/hooks/useTimeunknown';
 import useRetroPlanets from '@/app/_lib/hooks/useRetroPlanets';
 import AspectFilter from './AspectFilter';
 import CopyChart from './CopyChart';
+import { usePathname } from 'next/navigation';
+import { capitalize, zodiac } from '../_lib/config';
 
 export default function Charts({ chartID }) {
   const { unknownTime, retro} = useAstroForm();
  
  // Chart & Aspect Table & Aspect List, House and Planet Positions Lists
   const { aspect, aspectList, planetList, cuspList } = useRenderCharts(chartID);
+
+  // CopyChart Feature
+const pathname = usePathname()
+const timeUnknown = (["natal", "draconic", "progression"].includes(chartID) && unknownTime?.birth) || (chartID === "transit" && unknownTime?.transit);
+const copyChart = [`${capitalize(pathname.split('/').at(-1))}-Chart:`, "",
+  ...(timeUnknown ? ["Unknown time, house placements unavailable.", ""] : ["Signs:", ...cuspList.map(c => `${c.house}: ${c.sign}`), ""]),
+ "Planets:", ...planetList.map(p => {const house = p.planet === "As" ? 1 : p.planet === "Mc" ? 10 : p.house;
+  return `${p.planet} ${retro[chartID]?.includes(p.planet) ? "Retrograde" : ""} ${Object.keys(zodiac).find(s => zodiac[s] === p.symbol)} ${!timeUnknown ? `in House ${house}` : ""}`;}),"",
+  "Aspects:", ...aspect,"",].join("\n");
 
   useTimeunknown(chartID, unknownTime)
   useRetroPlanets(chartID, retro)
@@ -31,7 +42,7 @@ export default function Charts({ chartID }) {
     >
       <div className="min-[1000px]:w-[40%] min-w-0 h-fit flex flex-col">
 
-      <CopyChart chart={chartID} signs={cuspList} planets={planetList} aspects={aspect} retro={retro} time={unknownTime}/>
+      <CopyChart copy={copyChart}/>
 
         <div className="w-screen min-[1000px]:w-full flex flex-col gap-5 ">
         <HouseSignList data={{ planetList, cuspList }} />

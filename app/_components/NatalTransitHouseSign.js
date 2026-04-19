@@ -1,9 +1,6 @@
 import { generateComparisonTable } from "@/app/_lib/data-service";
 import { useAstroForm } from "../_lib/context/AstroContext";
-export default function NatalTransitHouseSign ({natalData, transitData}) {
-const {unknownTime, selected} = useAstroForm()
-
-const comparison = generateComparisonTable(natalData, transitData, [unknownTime?.birth, unknownTime?.transit]);
+export default function NatalTransitHouseSign ({comparison, selected}) {
 
   return <div className="rounded-sm py-5 sm:rounded-md sm:w-full h-fit">
   <div
@@ -12,6 +9,7 @@ const comparison = generateComparisonTable(natalData, transitData, [unknownTime?
       gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
     }}
   >
+
     {/* Header */}
     <div className="font-bold pb-1 gridContainer">Planet</div>
     <div className="font-bold text-[#4fa091] gridContainer ">Natal</div>

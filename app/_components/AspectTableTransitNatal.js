@@ -1,25 +1,7 @@
-'use client';
-
-import { calculateAspectsBetweenCharts } from "@/app/_lib/data-service";
 import { aspectSymbols, symbols } from "@/app/_lib/config";
 import ToggleAspectListBtn from "./ToggleAspectListBtn";
 
-export default function AspectTableTransitNatal({ natalData, transitData}) {
-
-  const aspects = calculateAspectsBetweenCharts(natalData, transitData);
-  const planets = symbols.map(([, name]) => name);
-
-  const aspectMatrix = planets.map((natalPlanet) => {
-    return {
-      planet: natalPlanet,
-      aspects: planets.map((transitPlanet) => {
-        const match = aspects.find(
-          (a) => a.point.name === natalPlanet && a.toPoint.name === transitPlanet
-        );
-        return match ? aspectSymbols[match.aspect.name] : "";
-      }),
-    };
-  });
+export default function AspectTableTransitNatal({aspects, planets, aspectMatrix}) {
 
   return (
     <div className="flex lg:flex-row flex-col md:w-fit w-full relative">
