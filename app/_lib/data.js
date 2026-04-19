@@ -4,11 +4,6 @@ export const items = [
       description:
         "Focuses on your current year and the area of your life that is most strongly influenced. It is used to identify which themes and life areas are coming to the forefront, based on the annual progression of the natal chart.",
     },
-    {  title: "Aspects & Configurations",
-      description:
-        "In the aspects and planetary configurations, you can see the key connections between the planets and how they shape your experiences and challenges. It helps you understand how different energies interact in your life and which special aspects influence your horoscope.",
-     
-    },
     {
       title: "Progressed Chart",
       description:
@@ -29,6 +24,12 @@ export const items = [
         "Shows how the current planetary movements influence your birth chart and allows you to understand the ongoing astrological influences on your life, including challenges and opportunities arising from the positions of the planets.",
     
     },
+  {
+    title: "Synastry Chart",
+    description:
+      "Compares two natal charts to reveal the dynamics between individuals. It highlights compatibility, challenges, and key connections, helping you understand how two people interact on emotional, mental, and energetic levels.",
+  },
+
   ];
   
 export const intro ='Liascope is an astrological app for astrology interested people who want to gain an initial insight into their personal horoscope. It displays key astrological elements such as planets, houses, and aspects. Chiron and asteroids are not included. Liascope uses the True Lilith and the True Lunar Node.'

@@ -110,12 +110,6 @@ td.empty {
 }
 
 .circle-wrapper {
-  --radius: 250px;
+  --radius: 280px;
 }
 
-
-@media (min-width: 1024px) {
-  .circle-wrapper {
-    --radius: 280px;
-  }
-}
