@@ -26,8 +26,8 @@ export const fetchSuggestions = async (query) => {
     const data = await fetchData(`/api/nominatim?q=${query}`, "City, Country, Coords data not found");
     return data;
   } catch {
-    return []
-    // throw new Error("Failed to fetch suggestions");
+    return error
+    //  throw new Error("Failed to fetch suggestions");
   }
 };
 

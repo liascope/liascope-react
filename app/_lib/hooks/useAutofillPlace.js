@@ -11,6 +11,6 @@ export function useAutofillPlace(key, place, fetchStart) {
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
-    // retry:0
+    retry:0
   });
 }

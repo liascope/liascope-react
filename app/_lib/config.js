@@ -4,8 +4,6 @@ export const NOMINATIM_URL= "https://nominatim.openstreetmap.org/search?q="
 // export const DEFAULT_HOUSE_SYSTEM= "1"; 
 export const DEFAULT_TIME = "00:00";
 export const DEBOUNCE = 1100;
-export const RETRY_DELAY = 3000;
-export const RETRY_COUNT = 3;
 
 export const capitalize = s => s[0].toUpperCase() + s.slice(1);
 

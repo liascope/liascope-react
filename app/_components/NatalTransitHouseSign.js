@@ -1,5 +1,3 @@
-import { generateComparisonTable } from "@/app/_lib/data-service";
-import { useAstroForm } from "../_lib/context/AstroContext";
 export default function NatalTransitHouseSign ({comparison, selected}) {
 
   return <div className="rounded-sm py-5 sm:rounded-md sm:w-full h-fit">

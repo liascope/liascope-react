@@ -21,7 +21,7 @@ export default function CityAutoComplete({ value, onChange, onSelect, label}) {
     return () => clearTimeout(t);
   }, [inputValue]);
 
-  const { data, isLoading } = useAutofillPlace(`place-${label}`,debounced, showSuggestions);
+  const { data, isLoading, isError } = useAutofillPlace(`place-${label}`,debounced, showSuggestions);
 
    const suggestions = Array.isArray(data) ? data : [];
 
@@ -62,7 +62,7 @@ export default function CityAutoComplete({ value, onChange, onSelect, label}) {
         required
         className="w-full"
         id={`place${label}`}
-      />
+      /><div className="absolute right-1 bottom-0 text-red-500 text-xs scale-85">{isError ? 'Place Not Found' : ''}</div>
 
       {showSuggestions && inputValue && suggestions.length > 0 && (
         <ul className="absolute bg-white border w-full z-40">
@@ -77,6 +77,7 @@ export default function CityAutoComplete({ value, onChange, onSelect, label}) {
           ))}
         </ul>
       )}
+ 
     </div>
   );
 }
